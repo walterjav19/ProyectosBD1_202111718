@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="CAT-PRO" directorySegmentName="seg_0" id="E323751E-2ACE-68AB-80BC-CC9E9DBE742E">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 17:02:10 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>7E0BD9FF-DAE2-6C9C-F5C6-96AE736D644F</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>6F91857E-A713-E586-FE00-B25A2DFB22B9</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

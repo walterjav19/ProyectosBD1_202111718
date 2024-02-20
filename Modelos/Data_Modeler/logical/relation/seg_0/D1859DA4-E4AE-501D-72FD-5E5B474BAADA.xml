@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="ORD-VEND" directorySegmentName="seg_0" id="D1859DA4-E4AE-501D-72FD-5E5B474BAADA">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 17:10:23 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>32F59516-F2AB-0C48-2258-7C9F43AED9C5</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>9255360F-9947-B4C7-162E-82989E66BC10</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
