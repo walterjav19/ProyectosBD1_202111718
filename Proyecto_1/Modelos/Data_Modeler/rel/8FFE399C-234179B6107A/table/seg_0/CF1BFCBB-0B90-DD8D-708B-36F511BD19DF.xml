@@ -1,0 +1,149 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CF1BFCBB-0B90-DD8D-708B-36F511BD19DF" name="Orden">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>32F59516-F2AB-0C48-2258-7C9F43AED9C5</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_cliente" id="8AD6B07F-49E6-1C26-6328-38B0259D2198">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>75E5134C-C7E9-51D0-7AAC-29DE6C3FBC52</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6502D68D-761D-9314-14A0-9425436DD355" referredColumn="0A7E6BB3-B3CD-814D-EA51-23CCFFF7A08F"/>
+</associations>
+</Column>
+<Column name="id_vendedor" id="A25A3010-2D27-A1D7-CA42-AB4C78E9ED65">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>1348A7BC-1DA9-B196-F7E3-761DBB077A72</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4BEC7F0D-151F-4F91-B8C6-13DFCB1D5E92" referredColumn="7FC9ACEA-62A9-8598-20B8-1A5600A38AF2"/>
+</associations>
+</Column>
+<Column name="id_producto" id="6783BECF-D3DF-CF0D-8D8A-487D06075B1D">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>3537FCDE-F25F-59B0-A4FF-B20DEBF78575</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="AECB9135-EB83-A12A-B942-0C6A2E212841" referredColumn="2E8173BF-D991-2B23-16AC-1196D1E540D0"/>
+</associations>
+</Column>
+<Column name="id_orden" id="BFD388EF-E4BF-A775-8CC1-899370B76673">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>3A76D78A-3921-B282-9E38-B42159E3073C</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="linea_orden" id="BC9FDCF8-DBAE-22CB-BEC2-5575B2FEC049">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>053AF2E5-0485-2AE6-762D-206D8E68FBA9</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_orden" id="B10A3F96-C9AD-3A74-C8BF-5D4B2EBA607F">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>7EF2F7D2-7534-0BEA-3618-C6C46791E585</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cantidad" id="6465C23A-344A-154D-53E6-BBD685E24E02">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>C9C65E61-62D1-05CD-A37E-C61AEE22B1FE</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D0062934-88EF-A68F-700A-C834F2B82DD3" name="Orden_PK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>FBC1EEB4-A66A-73EB-399A-22D6110252CC</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BFD388EF-E4BF-A775-8CC1-899370B76673"/>
+<colUsage columnID="BC9FDCF8-DBAE-22CB-BEC2-5575B2FEC049"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="BAEE377C-7693-14FD-934C-1393E9A365A6" name="Orden_Cliente_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>8B6F0756-D64E-B45B-D6FA-F452713A6FAB</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8AD6B07F-49E6-1C26-6328-38B0259D2198"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C4EE59C1-B9A3-8BDE-1DBE-F3162C197C3B" name="Orden_Vendedor_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>AD99B0A1-5DA6-E82C-1273-A00CFD2F83CE</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A25A3010-2D27-A1D7-CA42-AB4C78E9ED65"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9AEB0982-FF2B-3F25-23E2-834DF85E4CCC" name="Orden_Producto_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>F5FB6786-A323-EF05-F845-E34A4518AF25</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6783BECF-D3DF-CF0D-8D8A-487D06075B1D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

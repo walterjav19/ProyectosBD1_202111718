@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="PAI-CLI" directorySegmentName="seg_0" id="A7A88AA8-9448-B483-C45C-50C8FAEAE147">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:47:43 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<sourcePk>8832F9D9-F2E3-23CB-2454-1DBDDB9FE44E</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>3739C89B-C0CF-EBEA-E2FB-77CB6A8BD14D</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>65777BFE-5A18-53C9-D6E6-DA0587D956E7</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

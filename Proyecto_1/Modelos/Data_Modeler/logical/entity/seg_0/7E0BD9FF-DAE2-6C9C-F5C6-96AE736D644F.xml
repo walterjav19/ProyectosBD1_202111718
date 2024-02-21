@@ -1,0 +1,58 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="7E0BD9FF-DAE2-6C9C-F5C6-96AE736D644F" name="Categoria">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 16:31:23 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_categoria" id="D91E1DA7-ADC5-5300-C962-DD962EF8F175">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:37:16 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="C30B5A43-73CB-D7F3-8CEC-61D42B0D34E9">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:37:16 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="7AE4D393-E168-8135-C3E2-631D9D6BF390" name="Categoria PK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:37:18 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>D91E1DA7-ADC5-5300-C962-DD962EF8F175</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

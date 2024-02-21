@@ -1,0 +1,124 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="32F59516-F2AB-0C48-2258-7C9F43AED9C5" name="Orden">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 16:30:59 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_cliente" id="75E5134C-C7E9-51D0-7AAC-29DE6C3FBC52">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:55:26 UTC</createdTime>
+<generatorID>8B6F0756-D64E-B45B-D6FA-F452713A6FAB</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<referedAttribute>D9CD6840-55C5-C6DB-5F4F-F2E8EE63FEF2</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_vendedor" id="1348A7BC-1DA9-B196-F7E3-761DBB077A72">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:57:04 UTC</createdTime>
+<generatorID>AD99B0A1-5DA6-E82C-1273-A00CFD2F83CE</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<referedAttribute>D65814BB-2C83-28BC-6972-8A2E6723D1DA</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_producto" id="3537FCDE-F25F-59B0-A4FF-B20DEBF78575">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:57:29 UTC</createdTime>
+<generatorID>F5FB6786-A323-EF05-F845-E34A4518AF25</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<referedAttribute>09DBFDC5-DBD8-D507-695C-2EDF33F1F151</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_orden" id="3A76D78A-3921-B282-9E38-B42159E3073C">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:58:48 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="linea_orden" id="053AF2E5-0485-2AE6-762D-206D8E68FBA9">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:59:08 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_orden" id="7EF2F7D2-7534-0BEA-3618-C6C46791E585">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:59:27 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cantidad" id="C9C65E61-62D1-05CD-A37E-C61AEE22B1FE">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 22:00:02 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="FBC1EEB4-A66A-73EB-399A-22D6110252CC" name="Orden PK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:58:58 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>3A76D78A-3921-B282-9E38-B42159E3073C</attributeRef>
+<attributeRef>053AF2E5-0485-2AE6-762D-206D8E68FBA9</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

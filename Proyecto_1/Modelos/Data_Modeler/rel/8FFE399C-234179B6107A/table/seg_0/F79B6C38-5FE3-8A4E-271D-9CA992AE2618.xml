@@ -1,0 +1,155 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F79B6C38-5FE3-8A4E-271D-9CA992AE2618" name="Cliente">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>65777BFE-5A18-53C9-D6E6-DA0587D956E7</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_cliente" id="0A7E6BB3-B3CD-814D-EA51-23CCFFF7A08F">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>D9CD6840-55C5-C6DB-5F4F-F2E8EE63FEF2</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nombre" id="8531830D-6657-6817-1BD7-510DB8EDBD3E">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>F1E7DAE8-5752-53C6-A5DB-7F779B6144D7</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Apellido" id="F4C7C136-89D2-B5B3-B53F-A5C0D4759E7D">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>4D67F555-C3FB-0279-8CD0-99FDBFF97B86</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Direccion" id="D3238029-42EE-C523-4117-823C3B77D605">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>32D2AE0C-10D5-6A50-CA81-ABD97D9E4FBE</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Telefono" id="2DA2FBF3-9F4C-58EB-0116-3C2E19A2567E">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>50B8D193-3CA4-4E1F-200F-24AADF854562</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Tarjeta" id="CB79EDFE-7905-BCE4-9756-82A1E4959E43">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>0C7AEBED-A70F-3EB9-EDAA-F2F6EA1B2155</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Edad" id="D4C94B75-0DB1-B426-11C4-D267E589BD3D">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>84D94987-ACF5-60EA-A7B5-6FACA2D119F0</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Genero" id="6642237B-B126-C7C8-7D6F-17AA65ED3869">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>1DCE4D3F-28F5-55A5-031B-824A65FAC834</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Salario" id="BC4F3927-AFD1-5D3F-2E60-1A125A448B09">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>B69C5529-5543-DACF-46CF-751F9D850DF2</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_pais" id="0E95BEF3-9FA2-CD72-1E4F-770022DDF32F">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>E5A0F853-06AD-951E-11B5-CB446180CB46</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4830FC8F-58F4-2B9D-F25C-768090950BBB" referredColumn="0D50FCDB-617C-F773-61FD-42C60761473E"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="9AD531C2-E388-E0A7-A1D3-09C7D7ABD970" name="Cliente_PK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>2553CC02-DBD9-71A0-26B2-0BFD4571B077</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0A7E6BB3-B3CD-814D-EA51-23CCFFF7A08F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F718D9E9-53EF-3008-7B3B-75271FEA2EDB" name="Cliente_Pais_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>A7A88AA8-9448-B483-C45C-50C8FAEAE147</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0E95BEF3-9FA2-CD72-1E4F-770022DDF32F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

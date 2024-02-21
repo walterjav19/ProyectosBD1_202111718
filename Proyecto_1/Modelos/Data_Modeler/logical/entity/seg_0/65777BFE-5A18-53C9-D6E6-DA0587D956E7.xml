@@ -1,0 +1,159 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="65777BFE-5A18-53C9-D6E6-DA0587D956E7" name="Cliente">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 16:30:34 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_cliente" id="D9CD6840-55C5-C6DB-5F4F-F2E8EE63FEF2">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 16:35:46 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nombre" id="F1E7DAE8-5752-53C6-A5DB-7F779B6144D7">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:09:29 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Apellido" id="4D67F555-C3FB-0279-8CD0-99FDBFF97B86">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:12:01 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Direccion" id="32D2AE0C-10D5-6A50-CA81-ABD97D9E4FBE">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:13:14 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Telefono" id="50B8D193-3CA4-4E1F-200F-24AADF854562">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:14:03 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Tarjeta" id="0C7AEBED-A70F-3EB9-EDAA-F2F6EA1B2155">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:16:02 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Edad" id="84D94987-ACF5-60EA-A7B5-6FACA2D119F0">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:17:08 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Genero" id="1DCE4D3F-28F5-55A5-031B-824A65FAC834">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:17:51 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Salario" id="B69C5529-5543-DACF-46CF-751F9D850DF2">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:19:23 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_pais" id="E5A0F853-06AD-951E-11B5-CB446180CB46">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:47:43 UTC</createdTime>
+<generatorID>A7A88AA8-9448-B483-C45C-50C8FAEAE147</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<referedAttribute>7A91237C-F5C9-C44F-5BDA-D1BC2B6B54F6</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="2553CC02-DBD9-71A0-26B2-0BFD4571B077" name="Cliente PK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 16:36:45 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>D9CD6840-55C5-C6DB-5F4F-F2E8EE63FEF2</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

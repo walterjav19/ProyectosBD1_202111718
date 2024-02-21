@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="9062FF40-D6CD-A953-0EB7-B11518077165" name="Vendedor">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>9255360F-9947-B4C7-162E-82989E66BC10</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_vendedor" id="7FC9ACEA-62A9-8598-20B8-1A5600A38AF2">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>D65814BB-2C83-28BC-6972-8A2E6723D1DA</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nombre" id="46CDF313-6514-58AB-34FB-961B61437550">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>0ACF638F-0FB4-D87F-EDA8-1B773DC73BE8</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_pais" id="A2E75F94-C4DE-3CCB-4792-A75F614DC16A">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>1A010245-43AD-622D-9D68-44649536E68D</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="EEA8B57D-CB2E-71C0-2229-A85B03E160BE" referredColumn="0D50FCDB-617C-F773-61FD-42C60761473E"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="5BF74238-352E-D4B9-474D-780EC510FBC1" name="Vendedor_PK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>6E44B290-CD43-C633-4936-6BDA9018BCEF</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7FC9ACEA-62A9-8598-20B8-1A5600A38AF2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="085C3C83-1001-7F25-D118-57F295243DE3" name="Vendedor_Pais_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-21 00:36:02 UTC</createdTime>
+<generatorID>B08253CE-D1E5-16BD-FD84-89417B31EB84</generatorID>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A2E75F94-C4DE-3CCB-4792-A75F614DC16A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

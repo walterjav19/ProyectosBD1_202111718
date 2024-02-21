@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="ORD-VEN" directorySegmentName="seg_0" id="AD99B0A1-5DA6-E82C-1273-A00CFD2F83CE">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-02-20 21:57:04 UTC</createdTime>
+<ownerDesignName>Data_Modeler</ownerDesignName>
+<engineerTo>
+<item key="8FFE399C-D0B5-0693-7915-234179B6107A" value="true"/>
+</engineerTo>
+<sourcePk>6E44B290-CD43-C633-4936-6BDA9018BCEF</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>9255360F-9947-B4C7-162E-82989E66BC10</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>32F59516-F2AB-0C48-2258-7C9F43AED9C5</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
