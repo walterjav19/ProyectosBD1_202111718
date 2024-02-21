@@ -15,10 +15,20 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 
+
+
+const indexRoutes = require("./routes/index.routes.js")
+
+
+//request
+app.use("/",indexRoutes)
+app.use("/crearmodelo", indexRoutes);
+
+
 //Default route
 app.use((req,res,next)=>{
     res.status(404).json({
-        message:'Not found'
+        message:'Request Not found'
 });
 })
 
