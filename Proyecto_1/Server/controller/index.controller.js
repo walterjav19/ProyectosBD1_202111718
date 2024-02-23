@@ -1,6 +1,10 @@
 const { generarSeparacion, generarEncabezados, generarRegistros} = require('../Formatter/TableFormatter');
 require('dotenv').config(); // Cargar variables de entorno desde .env
 const mysql = require('mysql');
+const csv = require('csv-parser');
+const fs = require('fs');
+const { parse, format } = require('date-fns');
+
 
 const connection=mysql.createConnection({
     host: process.env.DB_HOST,
@@ -58,11 +62,11 @@ const CreateModel = (req, res) => {
         Nombre  varchar(100) not null,
         Apellido  varchar(100) not null,
         Direccion  varchar(100) not null,
-        Telefono  integer not null,
-        Tarjeta  integer not null,
+        Telefono  BIGINT not null,
+        Tarjeta  BIGINT not null,
         Edad  integer not null,
-        Genero char(1) not null,
         Salario Integer NOT NULL,
+        Genero char(1) not null,
         id_pais integer not null,
         FOREIGN KEY (id_pais) REFERENCES Pais(id_pais)
         );`
@@ -71,10 +75,10 @@ const CreateModel = (req, res) => {
         id_orden Integer,
         linea_orden Integer,
         fecha_orden Date Not null,
-        cantidad Integer Not null,
         id_cliente Integer Not Null,
         id_vendedor Integer Not Null,
         id_producto Integer Not null,
+        cantidad Integer Not null,
         FOREIGN KEY (id_cliente ) REFERENCES  Cliente(id_cliente),
         FOREIGN KEY (id_vendedor) REFERENCES  Vendedor(id_vendedor),
         FOREIGN KEY (id_producto) REFERENCES  Producto(id_producto),
@@ -226,10 +230,105 @@ const DeleteModel = (req, res) => {
     
 };
 
+const CargaDatos=(req,res)=>{
+    
+
+
+    const ListaArchivos=["Categorias","paises","vendedores","clientes","productos","ordenes"]
+    const NombreTablas=["Categoria","Pais","Vendedor","Cliente","Producto","Orden"]
+    ListaArchivos.forEach((archivo,num)=>{
+        // Ruta al archivo CSV
+        let filePath = `Data/${archivo}.csv`;
+
+        // Array para almacenar los datos del CSV
+        const data = [];
+
+        // Utilizando fs.createReadStream para leer el archivo CSV
+        fs.createReadStream(filePath)
+        .pipe(csv())
+        .on('data', (row) => {
+            // Cada fila se agrega al array 'data'
+            data.push(row)
+        })
+        .on('end', () => {
+            // El código aquí se ejecuta cuando se completa la lectura del archivo
+    
+                
+
+
+            data.forEach((rowData) => {
+                
+               let dato_insertar={} 
+               for(var clave in rowData){
+                //console.log(`clave: ${clave}, valor: ${rowData[clave]}`)
+                let header=clave.split(';').map(item => item.trim());
+                let valor=rowData[clave].split(';').map(item => item.trim());
+                
+                header.forEach((element,index) => {
+                    //comprobar si el dato es numerico
+                    if(!isNaN(valor[index])){
+                        valor[index]=parseFloat(valor[index])
+                    }
+                    
+                    if(element=="fecha_orden"){
+                        valor[index]=ModificarFormatoFecha(valor[index])
+                    }
+                    
+                    dato_insertar[element]=valor[index]
+                    
+                    
+                    
+                    
+                });
+                
+                
+                
+                connection.query(`INSERT INTO ${NombreTablas[num]} SET ?`,dato_insertar, (error, result) => {
+                    if (error) {
+                        console.error('Error al insertar datos:', error.message);
+                        console.log(`INSERT INTO ${NombreTablas[num]} SET ?`,dato_insertar)
+                    } 
+                }); 
+
+               }            
+                
+                    
+            });
+
+
+            
+            
+            
+            
+        })
+        .on('error', (error) => {
+            // Manejar errores durante la lectura
+            console.error('Error al leer el archivo CSV:', error.message);
+            res.status(500).json({ message: 'Error al leer el archivo CSV', error });
+        });
+    })
+
+    res.status(200).json({message:'Carga de Datos Hecha Correctamente'})
+    
+}
+
+const ModificarFormatoFecha=(fecha)=>{
+    //DD/MM/YYYY 27/01/2004 a YYYY-MM-DD 2004-01-27
+    // Parsear la fecha del formato 'DD/MM/YYYY'
+    const fechaParseada = parse(fecha, 'dd/MM/yyyy', new Date());
+
+    // Formatear la fecha al formato 'YYYY-MM-DD'
+    const fechaFormateada = format(fechaParseada, 'yyyy-MM-dd');
+
+    return fechaFormateada;
+
+}
+
 
 
 module.exports={
     index,
     CreateModel,
-    DeleteModel
+    DeleteModel,
+    CargaDatos
 }

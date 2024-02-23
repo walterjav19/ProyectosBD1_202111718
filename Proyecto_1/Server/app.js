@@ -24,6 +24,7 @@ const indexRoutes = require("./routes/index.routes.js")
 app.use("/",indexRoutes)
 app.use("/crearmodelo", indexRoutes);
 app.use("/eliminarmodelo", indexRoutes);
+app.use("/cargarmodelo",indexRoutes);
 
 
 //Default route
