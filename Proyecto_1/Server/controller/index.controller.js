@@ -230,85 +230,210 @@ const DeleteModel = (req, res) => {
     
 };
 
-const CargaDatos=(req,res)=>{
-    
 
-
-    const ListaArchivos=["Categorias","paises","vendedores","clientes","productos","ordenes"]
-    const NombreTablas=["Categoria","Pais","Vendedor","Cliente","Producto","Orden"]
-    ListaArchivos.forEach((archivo,num)=>{
-        // Ruta al archivo CSV
-        let filePath = `Data/${archivo}.csv`;
-
-        // Array para almacenar los datos del CSV
-        const data = [];
-
-        // Utilizando fs.createReadStream para leer el archivo CSV
-        fs.createReadStream(filePath)
-        .pipe(csv())
-        .on('data', (row) => {
-            // Cada fila se agrega al array 'data'
-            data.push(row)
-        })
-        .on('end', () => {
-            // El código aquí se ejecuta cuando se completa la lectura del archivo
-    
-                
-
-
-            data.forEach((rowData) => {
-                
-               let dato_insertar={} 
-               for(var clave in rowData){
-                //console.log(`clave: ${clave}, valor: ${rowData[clave]}`)
-                let header=clave.split(';').map(item => item.trim());
-                let valor=rowData[clave].split(';').map(item => item.trim());
-                
-                header.forEach((element,index) => {
-                    //comprobar si el dato es numerico
-                    if(!isNaN(valor[index])){
-                        valor[index]=parseFloat(valor[index])
-                    }
-                    
-                    if(element=="fecha_orden"){
-                        valor[index]=ModificarFormatoFecha(valor[index])
-                    }
-                    
-                    dato_insertar[element]=valor[index]
-                    
-                    
-                    
-                    
+async function  insertarEnLotesOrden(rows) {
+    connection.beginTransaction((err) => {
+        if (err) throw err;
+        connection.query('INSERT INTO Orden (id_orden, linea_orden, fecha_orden, id_cliente, id_vendedor, id_producto, cantidad) VALUES ?', [rows], (error, results, fields) => {
+            if (error) {
+                return connection.rollback(() => {
+                    throw error;
                 });
-                
-                
-                
-                connection.query(`INSERT INTO ${NombreTablas[num]} SET ?`,dato_insertar, (error, result) => {
-                    if (error) {
-                        console.error('Error al insertar datos:', error.message);
-                        console.log(`INSERT INTO ${NombreTablas[num]} SET ?`,dato_insertar)
-                    } 
-                }); 
-
-               }            
-                
-                    
+            }
+            connection.commit((err) => {
+                if (err) {
+                    return connection.rollback(() => {
+                        throw err;
+                    });
+                }
             });
-
-
-            
-            
-            
-            
-        })
-        .on('error', (error) => {
-            // Manejar errores durante la lectura
-            console.error('Error al leer el archivo CSV:', error.message);
-            res.status(500).json({ message: 'Error al leer el archivo CSV', error });
         });
-    })
+    });
+}
 
-    res.status(200).json({message:'Carga de Datos Hecha Correctamente'})
+
+async function  insertarEnLotesCliente(rows) {
+    connection.beginTransaction((err) => {
+        if (err) throw err;
+        connection.query('INSERT INTO Cliente (id_cliente,Nombre,Apellido,Direccion,Telefono,Tarjeta,Edad,Salario,Genero,id_pais) VALUES ?', [rows], (error, results, fields) => {
+            if (error) {
+                return connection.rollback(() => {
+                    throw error;
+                });
+            }
+            connection.commit((err) => {
+                if (err) {
+                    return connection.rollback(() => {
+                        throw err;
+                    });
+                }
+            });
+        });
+    });
+}
+
+async function  insertarEnLotesProductos(rows) {
+    connection.beginTransaction((err) => {
+        if (err) throw err;
+        connection.query('INSERT INTO Producto (id_producto,Nombre,Precio,id_categoria) VALUES ?', [rows], (error, results, fields) => {
+            if (error) {
+                return connection.rollback(() => {
+                    throw error;
+                });
+            }
+            connection.commit((err) => {
+                if (err) {
+                    return connection.rollback(() => {
+                        throw err;
+                    });
+                }
+            });
+        });
+    });
+}
+
+const insertarClientes = async () => {
+    return new Promise((resolve, reject) => {
+        let rows = [];
+        fs.createReadStream('Data/clientes.csv')
+            .pipe(csv({ separator: ';', mapHeaders: ({ header, index }) => header.trim() }))
+            .on('data', (row) => {
+                rows.push([Number(row.id_cliente), row.Nombre, row.Apellido, row.Direccion, Number(row.Telefono),Number(row.Tarjeta), Number(row.Edad), Number(row.Salario), row.Genero, Number(row.id_pais)]);
+                if (rows.length >= 1000) { // Insertar en lotes de 1000 filas
+                    insertarEnLotesCliente(rows).then(resolve).catch(reject);
+                    rows = [];
+                }
+            })
+            .on('end', () => {
+                if (rows.length > 0) {
+                    insertarEnLotesCliente(rows).then(resolve).catch(reject);
+                } else {
+                    resolve();
+                }
+            });
+    });
+};
+
+
+
+const insertarOrdenes = async () => {
+    return new Promise((resolve, reject) => {
+        let rows = [];
+        fs.createReadStream('Data/ordenes.csv')
+            .pipe(csv({ separator: ';', mapHeaders: ({ header, index }) => header.trim() }))
+            .on('data', (row) => {
+                rows.push([Number(row.id_orden), Number(row.linea_orden), ModificarFormatoFecha(row.fecha_orden), Number(row.id_cliente), Number(row.id_vendedor), Number(row.id_producto), Number(row.cantidad)]);
+                if (rows.length >= 1000) { // Insertar en lotes de 1000 filas
+                    insertarEnLotesOrden(rows).then(resolve).catch(reject);
+                    rows = [];
+                }
+            })
+            .on('end', () => {
+                if (rows.length > 0) {
+                    insertarEnLotesOrden(rows).then(resolve).catch(reject);
+                } else {
+                    resolve();
+                }
+            });
+    });
+};
+
+const InsertarProductos=async()=>{
+    return new Promise((resolve, reject) => {
+        let rows = [];
+        fs.createReadStream('Data/productos.csv')
+            .pipe(csv({ separator: ';', mapHeaders: ({ header, index }) => header.trim() }))
+            .on('data', (row) => {
+                rows.push([Number(row.id_producto), row.Nombre, Number(row.Precio), Number(row.id_categoria)]);
+                if (rows.length >= 1000) { // Insertar en lotes de 1000 filas
+                    insertarEnLotesProductos(rows).then(resolve).catch(reject);
+                    rows = [];
+                }
+            })
+            .on('end', () => {
+                if (rows.length > 0) {
+                    insertarEnLotesProductos(rows).then(resolve).catch(reject);
+                } else {
+                    resolve();
+                }
+            });
+    });
+}
+
+const InsertarCategorias=async()=>{
+    return new Promise((resolve, reject) => {
+        fs.createReadStream('Data/categorias.csv')
+            .pipe(csv({ separator: ';', mapHeaders: ({ header, index }) => header.trim() }))
+            .on('data', (row) => {
+                connection.query('INSERT INTO Categoria (id_categoria, nombre) VALUES (?, ?)', [Number(row.id_categoria), row.nombre], (error, results, fields) => {
+                    if (error) {
+                        reject(error);
+                    }else{
+                        resolve();
+                    }
+                });
+            })
+            .on('end', () => {
+                resolve();
+            });
+    });
+
+}
+
+const InsertarPaises=async()=>{
+    return new Promise((resolve, reject) => {
+        fs.createReadStream('Data/paises.csv')
+        .pipe(csv({ separator: ';', mapHeaders: ({ header, index }) => header.trim() }))
+        .on('data', (row) => {
+            connection.query('INSERT INTO Pais (id_pais, nombre) VALUES (?, ?)', [Number(row.id_pais), row.nombre], (error, results, fields) => {
+                if (error) {
+                    reject(error);
+                }else{
+                    resolve();
+                }
+            });
+        }).on('end', () => {   
+            resolve();
+        });
+    });
+}
+
+const InsertarVendedores=async()=>{
+    return new Promise((resolve, reject) => {
+        fs.createReadStream('Data/vendedores.csv')
+        .pipe(csv({ separator: ';', mapHeaders: ({ header, index }) => header.trim() }))
+        .on('data', (row) => {
+            connection.query('INSERT INTO Vendedor (id_vendedor, nombre, id_pais) VALUES (?, ?, ?)', [Number(row.id_vendedor), row.nombre, Number(row.id_pais)], (error, results, fields) => {
+                if (error) {
+                    reject(error);
+                }else{
+                    resolve();
+                }
+            });
+        }).on('end', () => {   
+            resolve();
+        });
+    });
+}
+
+const CargaDatos=async(req,res)=>{
+
+    try {
+        await Promise.all([
+            InsertarPaises(),
+            InsertarCategorias(),
+            InsertarProductos(),
+            insertarClientes(), 
+            InsertarVendedores(),
+        ]);
+        // esperar a que se inserten todo lo anterior con un delay de 500 milisegundo
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        await insertarOrdenes();
+        res.status(200).json({ message: 'Carga de Datos Hecha Correctamente' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al cargar datos', error: error.message });
+    }
+
     
 }
 

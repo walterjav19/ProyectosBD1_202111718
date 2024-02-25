@@ -2,9 +2,9 @@ Drop database Proyecto1;
 Create Database Proyecto1;
 Use Proyecto1;
 
-#drop table Categoria;
 
-Drop Table Categoria;
+
+#Drop Table Categoria;
 Create Table Categoria(
 id_categoria integer primary key,
 nombre varchar(100) not null
@@ -47,11 +47,11 @@ id_pais integer not null,
 FOREIGN KEY (id_pais) REFERENCES Pais(id_pais)
 );
 
-INSERT INTO Cliente VALUES
+/*INSERT INTO Cliente VALUES
 (1, 'Vivian', 'Schultz', '1511 Pooh Bear Lane', 4608499546, 1979280000000000, 55, 100000, 'F', 11),
-(2, 'Natisha', 'Flores', '3663 McDowell Street', 5119315633, 3144520000000000, 80, 40000, 'F', 11);
+(2, 'Natisha', 'Flores', '3663 McDowell Street', 5119315633, 3144520000000000, 80, 40000, 'F', 11);*/
 
-#drop table Orden;
+drop table Orden;
 Create Table Orden(
 id_orden Integer,
 linea_orden Integer,
@@ -66,8 +66,12 @@ FOREIGN KEY (id_producto) REFERENCES  Producto(id_producto),
 primary key (id_orden,linea_orden)
 );
 
-INSERT INTO Orden VALUES (1.0, 1, '2004-01-27', 7888, 96, 9117, 1);
-INSERT INTO Orden VALUES (1.0, 2, '2004-01-27', 7888, 79, 3353, 3);
+
+
+
+
+#INSERT INTO Orden VALUES (1.0, 1, '2004-01-27', 7888, 96, 9117, 1);
+#INSERT INTO Orden VALUES (1.0, 2, '2004-01-27', 7888, 79, 3353, 3);
 #truncate table orden;
 
 
