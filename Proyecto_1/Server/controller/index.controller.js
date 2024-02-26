@@ -535,7 +535,26 @@ const BorrarInfo = (req, res) => {
 /*Mostrar el cliente que más ha comprado. Se debe de mostrar el id del cliente,
 nombre, apellido, país y monto total*/
 const Consulta1 = (req, res) => {
-    res.status(200).json({ message: 'Consulta 1' });
+    query=`SELECT cliente.id_cliente, cliente.Nombre,cliente.apellido,pais.nombre as Pais,sum((orden.cantidad*producto.precio)) as monto_total
+    FROM cliente
+    JOIN orden ON cliente.id_cliente = orden.id_cliente
+    join pais ON cliente.id_pais=pais.id_pais
+    join producto on orden.id_producto=producto.id_producto
+    group by cliente.id_cliente
+    order by monto_total desc
+    limit 1
+    ;
+    `
+
+    connection.query(query, (error, result) => {
+        if (error) {
+            res.status(500).json({ message: 'Error al realizar la consulta', error });
+        } else {
+            res.status(200).json({ message: 'Consulta 1', result });
+        }
+    });
+
+    
 }
 
 module.exports={
