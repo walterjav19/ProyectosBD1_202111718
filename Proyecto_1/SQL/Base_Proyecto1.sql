@@ -4,19 +4,22 @@ Use Proyecto1;
 
 
 
-#Drop Table Categoria;
+Drop Table Categoria;
+truncate table categoria;
 Create Table Categoria(
 id_categoria integer primary key,
 nombre varchar(100) not null
 );
 
-#Drop table Pais;
+Drop table Pais;
+truncate table pais;
 Create Table Pais(
 id_pais integer primary key,
 nombre varchar(100) not null
 );
 
-#Drop Table Producto;
+Drop Table Producto;
+truncate table producto;
 Create Table Producto(
 id_producto integer primary key,
 Nombre varchar(100) not null,
@@ -25,14 +28,17 @@ id_categoria integer not null,
 FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria)
 );
 
-#Drop Table Vendedor;
+Drop Table Vendedor;
+truncate table vendedor;
 Create Table Vendedor(
 id_vendedor integer primary key,
 Nombre  varchar(100) not null,
 id_pais integer not null,
 FOREIGN KEY (id_pais) REFERENCES Pais(id_pais)
 );
-#drop table Cliente;
+
+drop table Cliente;
+truncate table cliente;
 Create Table Cliente(
 id_cliente integer primary key,
 Nombre  varchar(100) not null,
@@ -52,6 +58,7 @@ FOREIGN KEY (id_pais) REFERENCES Pais(id_pais)
 (2, 'Natisha', 'Flores', '3663 McDowell Street', 5119315633, 3144520000000000, 80, 40000, 'F', 11);*/
 
 drop table Orden;
+truncate table orden;
 Create Table Orden(
 id_orden Integer,
 linea_orden Integer,
@@ -78,20 +85,23 @@ primary key (id_orden,linea_orden)
 
 -- Select * de la tabla Categoria
 SELECT count(*) FROM Categoria;
-
+SELECT * FROM Categoria;
 -- Select * de la tabla Pais
 SELECT count(*) FROM Pais;
+SELECT * FROM Pais;
 
 -- Select * de la tabla Producto
 SELECT count(*) FROM Producto;
-
+select * from producto;
 -- Select * de la tabla Vendedor
 SELECT count(*) FROM Vendedor;
-
+select * from vendedor;
 -- Select * de la tabla Cliente
 SELECT count(*) FROM Cliente;
+select * from cliente;
 
 -- Select * de la tabla Orden
 SELECT count(*) FROM Orden;
+select * from orden;
 
 

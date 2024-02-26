@@ -5,7 +5,8 @@ const csv = require('csv-parser');
 const fs = require('fs');
 const { parse, format } = require('date-fns');
 
-
+let Aux_Table=false;
+let Aux_Insercion=false;
 const connection=mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -92,6 +93,11 @@ const CreateModel = (req, res) => {
             res.status(500).json({ message: 'Error al comprobar si hay tablas', error });
         } else {
             if(result.length>0){
+                console.log('**************************************')
+                console.log('*                                    *')
+                console.log('*         Modelo ya existe           *');
+                console.log('*                                    *')
+                console.log('**************************************')
                 res.status(500).json({ message: 'Modelo ya existe' });
             }else{
                     
@@ -100,8 +106,9 @@ const CreateModel = (req, res) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al crear Tabla Categoria', error });
                     } else {
-                        console.log('**********************Creando modelo**********************')
-                        console.log('- Tabla Categoria creada correctamente');
+                        console.log('****************Creando modelo****************')
+                        console.log('*                                            *')
+                        console.log('*   - Tabla Categoria creada correctamente   *');
                     }
                 });
             
@@ -109,7 +116,7 @@ const CreateModel = (req, res) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al crear Tabla Pais', error });
                     } else {
-                        console.log('- Tabla Pais creada correctamente');
+                        console.log('*   - Tabla Pais creada correctamente        *');
                     }
                 });
             
@@ -117,7 +124,7 @@ const CreateModel = (req, res) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al crear Tabla Producto', error });
                     } else {
-                        console.log('- Tabla Producto creada correctamente');
+                        console.log('*   - Tabla Producto creada correctamente    *');
                     }
                 });
             
@@ -125,7 +132,7 @@ const CreateModel = (req, res) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al crear Tabla Vendedor', error });
                     } else {
-                        console.log('- Tabla Vendedor creada correctamente');
+                        console.log('*   - Tabla Vendedor creada correctamente    *');
                     }
                 });
             
@@ -133,7 +140,7 @@ const CreateModel = (req, res) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al crear Tabla Cliente', error });
                     } else {
-                        console.log('- Tabla Cliente creada correctamente');
+                        console.log('*   - Tabla Cliente creada correctamente     *');
                     }
                 });
             
@@ -141,11 +148,12 @@ const CreateModel = (req, res) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al crear Tabla Orden', error });
                     } else {
-                        console.log('- Tabla Orden creada correctamente');
-                        console.log('**********************************************************')
+                        console.log('*   - Tabla Orden creada correctamente       *');
+                        console.log('*                                            *');
+                        console.log('**********************************************')
                     }
                 });
-               
+                Aux_Table=true;
                 res.status(200).json({ message: 'Modelo creado correctamente' });
             }
         }
@@ -169,14 +177,20 @@ const DeleteModel = (req, res) => {
             res.status(500).json({ message: 'Error al comprobar si hay tablas', error });
         } else {
             if(result.length==0){
+                console.log('**************************************')
+                console.log('*                                    *')
+                console.log('*         Modelo no existe           *');
+                console.log('*                                    *')
+                console.log('**************************************')
                 res.status(500).json({ message: 'Modelo a Borrar No existe' });
             }else{
                 connection.query(orden, (error, result) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al borrar Tabla Orden', error });
                     } else {
-                        console.log('**********************Borrando modelo**********************')
-                        console.log('- Tabla Orden borrada correctamente');
+                        console.log('**************Borrando modelo*****************')
+                        console.log('*                                            *')
+                        console.log('*   - Tabla Orden borrada correctamente      *');
                     }
                 });
 
@@ -184,7 +198,7 @@ const DeleteModel = (req, res) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al borrar Tabla Cliente', error });
                     } else {
-                        console.log('- Tabla Cliente borrada correctamente');
+                        console.log('*   - Tabla Cliente borrada correctamente    *');
                     }
                 });
 
@@ -192,7 +206,7 @@ const DeleteModel = (req, res) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al borrar Tabla Vendedor', error });
                     } else {
-                        console.log('- Tabla Vendedor borrada correctamente');
+                        console.log('*   - Tabla Vendedor borrada correctamente   *');
                     }
                 }); 
 
@@ -200,7 +214,7 @@ const DeleteModel = (req, res) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al borrar Tabla Producto', error });
                     } else {
-                        console.log('- Tabla Producto borrada correctamente');
+                        console.log('*   - Tabla Producto borrada correctamente   *');
                     }
                 });
 
@@ -209,7 +223,7 @@ const DeleteModel = (req, res) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al borrar Tabla Pais', error });
                     } else {
-                        console.log('- Tabla Pais borrada correctamente');
+                        console.log('*   - Tabla Pais borrada correctamente       *');
                     }
                 });
 
@@ -218,10 +232,13 @@ const DeleteModel = (req, res) => {
                     if (error) {
                         res.status(500).json({ message: 'Error al borrar Tabla Categoria', error });
                     } else {
-                        console.log('- Tabla Categoria borrada correctamente');
-                        console.log('**********************************************************')
+                        console.log('*   - Tabla Categoria borrada correctamente  *');
+                        console.log('*                                            *');
+                        console.log('**********************************************')
                     }
                 });
+                Aux_Table=false;
+                Aux_Insercion=false;
                 res.status(200).json({ message: 'Modelo borrado correctamente' });
             }
         }
@@ -417,22 +434,45 @@ const InsertarVendedores=async()=>{
 }
 
 const CargaDatos=async(req,res)=>{
-
-    try {
-        await Promise.all([
-            InsertarPaises(),
-            InsertarCategorias(),
-            InsertarProductos(),
-            insertarClientes(), 
-            InsertarVendedores(),
-        ]);
-        // esperar a que se inserten todo lo anterior con un delay de 500 milisegundo
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        await insertarOrdenes();
-        res.status(200).json({ message: 'Carga de Datos Hecha Correctamente' });
-    } catch (error) {
-        res.status(500).json({ message: 'Error al cargar datos', error: error.message });
+    
+    if(Aux_Table && !Aux_Insercion){
+        try {
+            await Promise.all([
+                InsertarPaises(),
+                InsertarCategorias(),
+                InsertarProductos(),
+                insertarClientes(), 
+                InsertarVendedores(),
+            ]);
+            // esperar a que se inserten todo lo anterior con un delay de 800 milisegundo
+            await new Promise((resolve) => setTimeout(resolve, 800));
+            await insertarOrdenes();
+            Aux_Insercion=true;
+            console.log('**************************************')
+            console.log('*                                    *')
+            console.log('* Carga de Datos Hecha Correctamente *');
+            console.log('*                                    *')
+            console.log('**************************************')
+            res.status(200).json({ message: 'Carga de Datos Hecha Correctamente' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error al cargar datos', error: error.message });
+        }
+    }else if(Aux_Table && Aux_Insercion){
+        console.log('**************************************')
+        console.log('*                                    *')
+        console.log('*         Datos ya cargados          *');
+        console.log('*                                    *')
+        console.log('**************************************')
+        res.status(500).json({ message: 'Datos ya cargados' });
+    }else if(!Aux_Table){
+        console.log('**************************************')
+        console.log('*                                    *')
+        console.log('*         Modelo no existe           *');
+        console.log('*                                    *')
+        console.log('**************************************')
+        res.status(500).json({ message: 'Modelo donde Insertar Inexistente' });
     }
+    
 
     
 }
@@ -449,11 +489,60 @@ const ModificarFormatoFecha=(fecha)=>{
 
 }
 
+const BorrarInfo = (req, res) => {
+    const queries = [
+        'TRUNCATE TABLE Orden;',
+        'SET FOREIGN_KEY_CHECKS = 0;',
+        'TRUNCATE TABLE Cliente;',
+        'TRUNCATE TABLE Producto;',
+        'TRUNCATE TABLE Vendedor;',
+        'TRUNCATE TABLE Pais;',
+        'TRUNCATE TABLE Categoria;',
+        'SET FOREIGN_KEY_CHECKS = 1;'
+    ];
+    let existserror = false;
+    let error_info = false;
+    for(query of queries){
+        connection.query(query, (error, result) => {
+            if (error) {
+                existserror = true;
+                error_info = error;
+                
+            }
+        });
+    }
+    Aux_Insercion=false;
+    if(existserror){
+        res.status(500).json({ message: 'Error al borrar datos' ,error_info:error_info});
+    }
+    else if(Aux_Table==false){
+        console.log('**************************************')
+        console.log('*                                    *')
+        console.log('*         Modelo no existe           *');
+        console.log('*                                    *')
+        console.log('**************************************')
+        res.status(500).json({ message: 'Modelo donde Borrar Inexistente' });
+    }else{
+        console.log('**************************************')
+        console.log('*                                    *')
+        console.log('*            Datos Borrados          *');
+        console.log('*                                    *')
+        console.log('**************************************')
+        res.status(200).json({ message: 'Datos Borrados Correctamente' });
+    }
+};
 
+/*Mostrar el cliente que más ha comprado. Se debe de mostrar el id del cliente,
+nombre, apellido, país y monto total*/
+const Consulta1 = (req, res) => {
+    res.status(200).json({ message: 'Consulta 1' });
+}
 
 module.exports={
     index,
     CreateModel,
     DeleteModel,
-    CargaDatos
+    CargaDatos,
+    BorrarInfo,
+    Consulta1
 }
