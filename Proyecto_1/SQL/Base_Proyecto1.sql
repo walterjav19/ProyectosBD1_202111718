@@ -19,7 +19,7 @@ nombre varchar(100) not null
 );
 
 Drop Table Producto;
-truncate table producto;
+truncate table Producto;
 Create Table Producto(
 id_producto integer primary key,
 Nombre varchar(100) not null,
@@ -102,6 +102,10 @@ select * from cliente;
 
 -- Select * de la tabla Orden
 SELECT count(*) FROM Orden;
+select * from orden;
+
+/*Mostrar el cliente que más ha comprado. Se debe de mostrar el id del cliente,
+nombre, apellido, país y monto total*/
 select * from orden;
 
 

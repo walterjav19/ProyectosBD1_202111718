@@ -557,11 +557,66 @@ const Consulta1 = (req, res) => {
     
 }
 
+/*Mostrar el producto más y menos comprado. Se debe mostrar el id del producto,
+nombre del producto, categoría, cantidad de unidades y monto vendido.*/
+const Consulta2 = (req, res) => {
+    const query=`(select producto.id_producto,producto.nombre,categoria.nombre as categoria,sum(orden.cantidad) as cantidad_unidades 
+    ,sum(orden.cantidad*producto.precio) as monto_vendido from
+    orden 
+    join producto on orden.id_producto=producto.id_producto
+    join categoria on producto.id_categoria=categoria.id_categoria
+    group by producto.id_producto
+    order by cantidad_unidades desc
+    limit 1)
+    UNION
+    (select producto.id_producto,producto.nombre,categoria.nombre as categoria,COALESCE(sum(orden.cantidad),0) as cantidad_unidades 
+    ,COALESCE(sum(orden.cantidad*producto.precio),0) as monto_vendido from
+    producto 
+    left join orden  on producto.id_producto=orden.id_producto
+    join categoria on producto.id_categoria=categoria.id_categoria
+    group by producto.id_producto,producto.nombre,categoria.nombre
+    order by cantidad_unidades asc, producto.nombre asc
+    limit 1)
+    ;`
+
+    connection.query(query, (error, result) => {
+        if (error) {
+            res.status(500).json({ message: 'Error al realizar la consulta', error });
+        } else {
+            res.status(200).json({ message: 'Consulta 2', result });
+        }
+    });
+
+
+}
+/*Mostrar a la persona que más ha vendido. Se debe mostrar el id del vendedor,
+nombre del vendedor, monto total vendido*/
+const Consulta3 = (req, res) => {
+    const query=`
+    select V.id_vendedor,V.Nombre
+    ,sum((O.cantidad*P.Precio)) as monto_total 
+    from vendedor V
+    join orden O on V.id_vendedor=O.id_vendedor
+    join producto P on P.id_producto=O.id_producto
+    group by V.id_vendedor
+    order by monto_total desc
+    limit 1;
+    `
+    connection.query(query, (error, result) => {
+        if (error) {
+            res.status(500).json({ message: 'Error al realizar la consulta', error });
+        } else {
+            res.status(200).json({ message: 'Consulta 3', result });
+        }
+    });
+};
 module.exports={
     index,
     CreateModel,
     DeleteModel,
     CargaDatos,
     BorrarInfo,
-    Consulta1
+    Consulta1,
+    Consulta2,
+    Consulta3
 }

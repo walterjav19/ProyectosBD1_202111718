@@ -27,6 +27,8 @@ app.use("/eliminarmodelo", indexRoutes);
 app.use("/cargarmodelo",indexRoutes);
 app.use("/borrarinfodb",indexRoutes);
 app.use("/consulta1",indexRoutes);
+app.use("/consulta2",indexRoutes);
+app.use("/consulta3",indexRoutes);
 
 
 //Default route
