@@ -29,6 +29,8 @@ app.use("/borrarinfodb",indexRoutes);
 app.use("/consulta1",indexRoutes);
 app.use("/consulta2",indexRoutes);
 app.use("/consulta3",indexRoutes);
+app.use("/consulta4",indexRoutes)
+app.use("/consulta5",indexRoutes)
 
 
 //Default route
