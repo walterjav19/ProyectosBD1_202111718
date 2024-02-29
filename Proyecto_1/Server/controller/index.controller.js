@@ -668,6 +668,79 @@ const Consulta5=(req,res)=>{
 }
 
 
+/*Mostrar la categoría que más y menos se ha comprado. Debe de mostrar el nombre
+de la categoría y cantidad de unidades. (Una sola consulta)*/
+const Consulta6=(req,res)=>{
+    const query=`(select
+        C.Nombre as Nombre_Categoria, 
+        sum(O.Cantidad) as Unidades_Vendidas
+        from orden O
+        join producto P on O.id_producto=P.id_producto
+        join Categoria C on C.id_categoria=P.id_categoria
+        group by C.id_categoria
+        order by Unidades_Vendidas DESC
+        limit 1)
+        Union
+        (select
+        C.Nombre as Nombre_Categoria, 
+        sum(O.Cantidad) as Unidades_Vendidas
+        from orden O
+        join producto P on O.id_producto=P.id_producto
+        join Categoria C on C.id_categoria=P.id_categoria
+        group by C.id_categoria
+        order by Unidades_Vendidas asc
+        limit 1);`
+        connection.query(query, (error, result) => {
+            if (error) {
+                res.status(500).json({ message: 'Error al realizar la consulta', error });
+            } else {
+                res.status(200).json({ message: 'Consulta 6', result });
+            }
+        });
+}
+
+
+/*Mostrar la categoría más comprada por cada país. Se debe de mostrar el nombre del
+país, nombre de la categoría y cantidad de unidades*/
+const Consulta7=(req,res)=>{
+    const query=`WITH CategoriasRank AS (
+        SELECT
+            Pa.nombre AS NombrePais,
+            Cat.nombre AS NombreCategoria,
+            SUM(O.cantidad) AS CantidadUnidades,
+            ROW_NUMBER() OVER (PARTITION BY Pa.id_pais ORDER BY SUM(O.cantidad) DESC) AS RankCategoria
+        FROM
+            Orden O
+        JOIN
+            Producto P ON O.id_producto = P.id_producto
+        JOIN
+            Categoria Cat ON P.id_categoria = Cat.id_categoria
+        JOIN
+            Cliente Cli ON O.id_cliente = Cli.id_cliente
+        JOIN
+            Pais Pa ON Cli.id_pais = Pa.id_pais
+        GROUP BY
+            Cat.id_categoria, Pa.id_pais
+    )
+    SELECT
+        NombrePais,
+        NombreCategoria,
+        CantidadUnidades
+    FROM
+        CategoriasRank
+    WHERE
+        RankCategoria = 1
+    ORDER BY
+        CantidadUnidades DESC;`
+    connection.query(query, (error, result) => {
+        if (error) {
+            res.status(500).json({ message: 'Error al realizar la consulta', error });
+        } else {
+            res.status(200).json({ message: 'Consulta 7', result });
+        }
+    });
+}   
+
 module.exports={
     index,
     CreateModel,
@@ -678,5 +751,7 @@ module.exports={
     Consulta2,
     Consulta3,
     Consulta4,
-    Consulta5
+    Consulta5,
+    Consulta6,
+    Consulta7
 }
