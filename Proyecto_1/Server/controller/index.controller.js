@@ -4,6 +4,7 @@ const mysql = require('mysql');
 const csv = require('csv-parser');
 const fs = require('fs');
 const { parse, format } = require('date-fns');
+const { query } = require('express');
 
 let Aux_Table=false;
 let Aux_Insercion=false;
@@ -739,7 +740,67 @@ const Consulta7=(req,res)=>{
             res.status(200).json({ message: 'Consulta 7', result });
         }
     });
-}   
+}
+
+/*Mostrar las ventas por mes de Inglaterra. Debe de mostrar el número del mes y el
+monto.*/
+const Consulta8=(req,res)=>{
+    const query=`select 
+    month(O.fecha_orden) as Num_Mes,
+    monthname(O.fecha_orden) as Nombre_Mes, 
+    sum(O.cantidad*P.precio) as Monto_Total 
+    from orden O
+    join producto P on O.id_producto=P.id_producto
+    join Vendedor V on O.id_vendedor=V.id_vendedor
+    join Pais Pa on V.id_pais=Pa.id_pais
+    where Pa.id_pais=10
+    group by Num_Mes,Nombre_Mes;`
+
+
+    connection.query(query, (error, result) => {
+        if (error) {
+            res.status(500).json({ message: 'Error al realizar la consulta', error });
+        } else {
+            res.status(200).json({ message: 'Consulta 8', result });
+        }
+    });
+}
+
+/*Mostrar el mes con más y menos ventas. Se debe de mostrar el número de mes y
+monto. (Una sola consulta).*/
+
+const Consulta9=(req,res)=>{  
+    const query=`(select month(O.fecha_orden) as Num_Mes,
+    monthname(O.fecha_orden) as Nombre_Mes, 
+    sum(O.cantidad*P.precio) as Monto_Total 
+    from orden O
+    join producto P on O.id_producto=P.id_producto
+    join Vendedor V on O.id_vendedor=V.id_vendedor
+    join Pais Pa on V.id_pais=Pa.id_pais
+    group by Num_Mes,Nombre_Mes
+    order by Monto_Total desc
+    limit 1)
+    union
+    (select month(O.fecha_orden) as Num_Mes,
+    monthname(O.fecha_orden) as Nombre_Mes, 
+    sum(O.cantidad*P.precio) as Monto_Total 
+    from orden O
+    join producto P on O.id_producto=P.id_producto
+    join Vendedor V on O.id_vendedor=V.id_vendedor
+    join Pais Pa on V.id_pais=Pa.id_pais
+    group by Num_Mes,Nombre_Mes
+    order by Monto_Total asc
+    limit 1);`
+
+    connection.query(query, (error, result) => {   
+        if (error) {
+            res.status(500).json({ message: 'Error al realizar la consulta', error });
+        } else {
+            res.status(200).json({ message: 'Consulta 9', result });
+        }
+     });
+ }
+
 
 module.exports={
     index,
@@ -753,5 +814,7 @@ module.exports={
     Consulta4,
     Consulta5,
     Consulta6,
-    Consulta7
+    Consulta7,
+    Consulta8,
+    Consulta9
 }
