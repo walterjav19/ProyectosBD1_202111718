@@ -801,6 +801,24 @@ const Consulta9=(req,res)=>{
      });
  }
 
+/*Mostrar las ventas de cada producto de la categoría deportes. Se debe de mostrar el
+id del producto, nombre y monto*/
+ const Consulta10=(req,res)=>{
+    const query=`select P.id_producto,P.nombre,coalesce(SUM(O.cantidad*P.Precio),0) as monto_total from producto P
+    left join orden O  ON P.id_producto=O.id_producto
+    join categoria C ON P.id_categoria=C.id_categoria
+    where P.id_categoria=15
+    group by P.id_producto
+    order by monto_total asc;`
+    connection.query(query, (error, result) => {
+        if (error) {
+            res.status(500).json({ message: 'Error al realizar la consulta', error });
+        } else {
+            res.status(200).json({ message: 'Consulta 10', result });
+        }
+    });
+}
+
 
 module.exports={
     index,
@@ -816,5 +834,6 @@ module.exports={
     Consulta6,
     Consulta7,
     Consulta8,
-    Consulta9
+    Consulta9,
+    Consulta10
 }

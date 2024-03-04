@@ -35,6 +35,7 @@ app.use("/consulta6",indexRoutes)
 app.use("/consulta7",indexRoutes)
 app.use("/consulta8",indexRoutes)
 app.use("/consulta9",indexRoutes)
+app.use("/consulta10",indexRoutes)
 
 //Default route
 app.use((req,res,next)=>{

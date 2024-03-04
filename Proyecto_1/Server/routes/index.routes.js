@@ -19,4 +19,5 @@ router.get("/consulta6",indexController.Consulta6)
 router.get("/consulta7",indexController.Consulta7)
 router.get("/consulta8",indexController.Consulta8)
 router.get("/consulta9",indexController.Consulta9)
+router.get("/consulta10",indexController.Consulta10)
 module.exports=router;
