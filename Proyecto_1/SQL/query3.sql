@@ -7,7 +7,7 @@ select V.id_vendedor,V.Nombre
 from vendedor V
 join orden O on V.id_vendedor=O.id_vendedor
 join producto P on P.id_producto=O.id_producto
-group by V.id_vendedor
+group by V.id_vendedor,V.Nombre
 order by monto_total desc
 limit 1;
 
