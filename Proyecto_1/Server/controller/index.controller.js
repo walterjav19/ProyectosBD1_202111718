@@ -491,7 +491,7 @@ const ModificarFormatoFecha=(fecha)=>{
 }
 
 const BorrarInfo = (req, res) => {
-    const queries = [
+    let queries = [
         'TRUNCATE TABLE Orden;',
         'SET FOREIGN_KEY_CHECKS = 0;',
         'TRUNCATE TABLE Cliente;',
@@ -503,8 +503,8 @@ const BorrarInfo = (req, res) => {
     ];
     let existserror = false;
     let error_info = false;
-    for(query of queries){
-        connection.query(query, (error, result) => {
+    for(let quer of queries){
+        connection.query(quer, (error, result) => {
             if (error) {
                 existserror = true;
                 error_info = error;
@@ -573,12 +573,12 @@ const Consulta2 = (req, res) => {
     (select producto.id_producto,producto.nombre,categoria.nombre as categoria,COALESCE(sum(orden.cantidad),0) as cantidad_unidades 
     ,COALESCE(sum(orden.cantidad*producto.precio),0) as monto_vendido from
     producto 
-    left join orden  on producto.id_producto=orden.id_producto
+    join orden  on producto.id_producto=orden.id_producto
     join categoria on producto.id_categoria=categoria.id_categoria
     group by producto.id_producto,producto.nombre,categoria.nombre
-    order by cantidad_unidades asc, producto.nombre asc
-    limit 1)
-    ;`
+    order by cantidad_unidades asc, producto.nombre asc,monto_vendido
+    limit 1);
+    `
 
     connection.query(query, (error, result) => {
         if (error) {
@@ -804,12 +804,21 @@ const Consulta9=(req,res)=>{
 /*Mostrar las ventas de cada producto de la categoría deportes. Se debe de mostrar el
 id del producto, nombre y monto*/
  const Consulta10=(req,res)=>{
-    const query=`select P.id_producto,P.nombre,coalesce(SUM(O.cantidad*P.Precio),0) as monto_total from producto P
-    left join orden O  ON P.id_producto=O.id_producto
-    join categoria C ON P.id_categoria=C.id_categoria
-    where P.id_categoria=15
-    group by P.id_producto
-    order by monto_total asc;`
+    const query=`    SELECT 
+    P.id_producto,
+    P.nombre,
+    COALESCE(SUM(O.cantidad * P.Precio), 0) AS monto_total 
+FROM 
+    Orden O 
+JOIN 
+    producto P ON O.id_producto = P.id_producto 
+JOIN 
+    categoria C ON C.id_categoria = P.id_categoria 
+WHERE 
+    P.id_categoria = 15 
+GROUP BY 
+    P.id_producto
+order by monto_total `
     connection.query(query, (error, result) => {
         if (error) {
             res.status(500).json({ message: 'Error al realizar la consulta', error });

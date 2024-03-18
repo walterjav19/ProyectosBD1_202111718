@@ -53,6 +53,7 @@ id_pais integer not null,
 FOREIGN KEY (id_pais) REFERENCES Pais(id_pais)
 );
 
+
 /*INSERT INTO Cliente VALUES
 (1, 'Vivian', 'Schultz', '1511 Pooh Bear Lane', 4608499546, 1979280000000000, 55, 100000, 'F', 11),
 (2, 'Natisha', 'Flores', '3663 McDowell Street', 5119315633, 3144520000000000, 80, 40000, 'F', 11);*/
