@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="8D545C22-22FA-0B95-0707-E4BFD3505BC5" name="Debito">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>FB059D95-BDA3-9A43-6475-73C66032D0C1</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Id_Debito" id="DA354DCD-949A-7DD9-F21B-B3B2DB012B21">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>5E3FAEA0-DB33-F498-2B1A-BBA202F71CBA</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Fecha" id="ECB13A87-58E7-F201-17B4-1BDA040681FD">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>FC83AD4D-0EAE-E6AB-CEA0-C1784FA625BA</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Monto" id="7E84ED65-D44C-7110-6D07-6355D263EC16">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>20B12E2B-6516-A5D1-F623-46FC0A5FBD69</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>12</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,12,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Detalle" id="2B5E0705-D26C-3E14-F277-8539A5FC2E96">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>960BE3B5-C8E7-5A98-3329-AE5A96311978</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40</dataTypeSize>
+<ownDataTypeParameters>40,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8B54E88C-C0FE-7A6E-2FE3-8B38C1F4A39C" name="Debito_PK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>9A788BEF-BEFF-2176-457A-AFA90D0ACE18</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DA354DCD-949A-7DD9-F21B-B3B2DB012B21"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="CUE-TIC" directorySegmentName="seg_0" id="A3848E39-52D6-4C5A-0D47-1FEBE9DEF7FF">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:38:06 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<sourcePk>48EC3E63-4318-E242-7ED9-A8556C58AC15</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>DF954C42-8CFD-49BF-EF1D-6802832FDC85</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>F1E09F50-C081-EB79-DA34-A3B5A3903C83</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

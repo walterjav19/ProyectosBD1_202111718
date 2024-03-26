@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="TRA-TIP" directorySegmentName="seg_0" id="F4DB7A13-2FEC-E911-8D66-DF38429E789D">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 23:37:07 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<sourcePk>E369074D-7367-74DF-8714-A226038D71F3</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>0178D6EB-B365-BA7D-909E-3237A94C7CA1</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>F6E53407-DFAD-0DCF-39D4-7E37EFE2EB40</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

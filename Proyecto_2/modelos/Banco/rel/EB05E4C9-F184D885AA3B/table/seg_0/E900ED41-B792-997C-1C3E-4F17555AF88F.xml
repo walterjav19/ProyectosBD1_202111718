@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E900ED41-B792-997C-1C3E-4F17555AF88F" name="TipoCliente">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>0A68D8FC-67EE-8655-9B9E-F766E3126772</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="IdTipo" id="FB7DF137-CF96-D8BA-9A52-0D6313782F3B">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>ED2617BD-705C-59B5-6AC9-A9492FFEE9F7</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nombre" id="D7B05D82-BE55-C8F9-9646-2BDAE559F685">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>3EAE4615-301C-EAF3-09BC-087C30A699E7</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Descripcion" id="D9DF825F-9DF8-39B8-8013-3691C0032602">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>65CA5EBE-9159-1EBD-D5AB-9E9F340485AE</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40</dataTypeSize>
+<ownDataTypeParameters>40,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="604177E4-3ED3-8FA8-D8C6-650E386E2A8E" name="TipoCliente_PK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>9C683760-64FF-C550-23C0-62738FC1FBED</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FB7DF137-CF96-D8BA-9A52-0D6313782F3B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,126 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="F6E53407-DFAD-0DCF-39D4-7E37EFE2EB40" name="Transaccion">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 05:06:52 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Id_Transaccion" id="DD298664-29F0-0F69-6859-FB023BE7C3FF">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:22:46 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Fecha" id="89C327AB-7879-4D25-390E-3F53BF0E5367">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:22:46 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Detalle" id="02E8EE17-8328-4524-D545-B1A675B3D7B8">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:22:47 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40</dataTypeSize>
+<ownDataTypeParameters>40,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="No_Cuenta" id="C1111784-ABE1-679B-DE0A-FE9FD3B4BC9A">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:29:27 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Id_Deposito" id="34A1A3C8-A14F-581D-6D74-B3B161376DF4">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 23:35:41 UTC</createdTime>
+<generatorID>2778EA83-7C48-578E-80B6-B22D7EC1A239</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<referedAttribute>65DF568D-07AA-BE58-0B50-E42AAF1A4CF7</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Id_Debito" id="9D1771E4-D5C6-3636-396A-DE58B65EDB85">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 23:36:11 UTC</createdTime>
+<generatorID>5CFBDC2B-E8FA-FEAE-BC99-6B454D530DDD</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<referedAttribute>5E3FAEA0-DB33-F498-2B1A-BBA202F71CBA</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="CodigoTransaccion" id="45F03037-7CB7-1949-C590-7577EE29B94D">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 23:37:07 UTC</createdTime>
+<generatorID>F4DB7A13-2FEC-E911-8D66-DF38429E789D</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<referedAttribute>955BFE9D-ECDC-BDF4-5C25-DA78F9B45D20</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="7A0EDB47-8BA5-5C58-D232-E831E1D4236B" name="Transaccion PK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:23:12 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>DD298664-29F0-0F69-6859-FB023BE7C3FF</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

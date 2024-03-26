@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="DEP-CLI" directorySegmentName="seg_0" id="0E96A302-4B0C-37CD-F4EF-7A81EFB39D2C">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 23:33:05 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<sourcePk>91620B80-B50C-DF67-501E-1928039772EB</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>BFD72AE8-7A1A-3619-86F0-CC2943A215E4</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>397953D0-2195-2DD0-1DDE-BEE626CD5399</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

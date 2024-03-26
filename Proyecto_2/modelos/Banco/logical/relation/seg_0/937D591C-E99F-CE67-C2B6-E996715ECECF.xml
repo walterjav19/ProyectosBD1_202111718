@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="TCL-CLI" directorySegmentName="seg_0" id="937D591C-E99F-CE67-C2B6-E996715ECECF">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:34:26 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<sourcePk>9C683760-64FF-C550-23C0-62738FC1FBED</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>0A68D8FC-67EE-8655-9B9E-F766E3126772</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>BFD72AE8-7A1A-3619-86F0-CC2943A215E4</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

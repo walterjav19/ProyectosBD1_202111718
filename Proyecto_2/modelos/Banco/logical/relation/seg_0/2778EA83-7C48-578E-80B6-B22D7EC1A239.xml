@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="TRA-DEB" directorySegmentName="seg_0" id="2778EA83-7C48-578E-80B6-B22D7EC1A239">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 23:35:41 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<sourcePk>DC120AA9-65AD-89D3-C5B6-2932560BA653</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>397953D0-2195-2DD0-1DDE-BEE626CD5399</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>F6E53407-DFAD-0DCF-39D4-7E37EFE2EB40</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

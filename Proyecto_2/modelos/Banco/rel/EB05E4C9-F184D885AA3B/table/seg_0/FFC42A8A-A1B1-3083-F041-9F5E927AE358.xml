@@ -1,0 +1,162 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FFC42A8A-A1B1-3083-F041-9F5E927AE358" name="Cuenta">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>F1E09F50-C081-EB79-DA34-A3B5A3903C83</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Id_Cuenta" id="B08CBF4E-6DEC-7687-C6ED-D53B031989D8">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>3E57EA28-2EF1-B79D-4A51-A0CD8E0B4B08</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Monto_Apertura" id="3590EFA6-26C9-4C0A-FE5F-FBD271DEBE7A">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>0F191CFF-4BCA-4B08-6661-A6D1D2ABA0B8</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>12</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,12,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Saldo_Cuenta" id="A63BE7DE-9B13-CE42-3294-BB11BA0C0985">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>A912B88B-ED1C-8FC6-8026-3E6CC18A8B90</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>12</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,12,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Descripcion" id="C330EB1C-9F73-B7B4-9845-3E8C0E3A45E1">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>1A3DB46D-86B9-152B-277F-69695D7E1E06</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FechaApertura" id="668536F6-B890-5782-BBAD-C46FD5B5EC35">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>54825928-6AAB-B747-AFF8-F25E99E1E1F9</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Detalles" id="A0B04052-C1F8-43F7-A0B7-A244538E1725">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>694C81C6-EEAB-6931-171C-6C9D6B3D5FC4</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TipoCuenta_Codigo" id="6783E8EB-5B57-3286-9560-B38F9F8E605D">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:42:12 UTC</createdTime>
+<generatorID>00180081-71A9-7710-96E4-8F91479B1DD8</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="288BB840-A253-59B8-9500-7BB7368830DB" referredColumn="8C69739E-1C3F-9619-E034-748946DBCB03"/>
+</associations>
+</Column>
+<Column name="Cliente_IdCliente" id="D00D1A2C-FE70-EBB3-B694-8B73804F4140">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:43:52 UTC</createdTime>
+<generatorID>AB26BE6A-16E0-CAE3-211E-5118B9EBE9C2</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4760422B-E29E-3B2D-0050-DA4169D20DF2" referredColumn="9CB0D8FE-EA26-D36C-764B-5724DEC0A578"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="762B00C4-140B-014B-DBA7-E3F4C746CF4E" name="Cuenta_PK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:35:06 UTC</createdTime>
+<generatorID>E7EE7440-FC11-7A89-C27D-6D31F1BD7CFE</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B08CBF4E-6DEC-7687-C6ED-D53B031989D8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A99328E9-5455-6D74-01B1-42FF20DA4475" name="Cuenta__IDX">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:43:52 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>F204F97E-2358-29E9-F408-649DF53D7D78</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="D00D1A2C-FE70-EBB3-B694-8B73804F4140"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EDFE56DF-82BD-1115-EFDC-38DC16235474" name="Cuenta_TipoCuenta_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:42:12 UTC</createdTime>
+<generatorID>A3848E39-52D6-4C5A-0D47-1FEBE9DEF7FF</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6783E8EB-5B57-3286-9560-B38F9F8E605D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="16A6A56A-F65A-90C5-4FCE-DE67874EC0E9" name="Cuenta_Cliente_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-26 19:43:52 UTC</createdTime>
+<generatorID>F204F97E-2358-29E9-F408-649DF53D7D78</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D00D1A2C-FE70-EBB3-B694-8B73804F4140"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
