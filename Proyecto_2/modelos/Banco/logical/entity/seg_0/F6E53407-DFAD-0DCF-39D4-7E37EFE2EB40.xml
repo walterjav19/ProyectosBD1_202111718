@@ -107,6 +107,20 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="Id_Compra" id="6178B263-A076-84D6-9532-C9C00CB3007F">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:32:07 UTC</createdTime>
+<generatorID>0549AC7D-A275-DC9A-5A68-3A8F8E1EA6C1</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<referedAttribute>FCA0454E-44F5-B0C3-5F67-2A511FA6ECE2</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="7A0EDB47-8BA5-5C58-D232-E831E1D4236B" name="Transaccion PK">

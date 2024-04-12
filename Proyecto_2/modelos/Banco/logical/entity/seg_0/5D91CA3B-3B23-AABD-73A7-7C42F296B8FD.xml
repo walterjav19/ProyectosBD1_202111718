@@ -81,6 +81,34 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="IdServicio" id="6DFBB52D-E792-3108-137C-B7E73A8A2649">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:29:35 UTC</createdTime>
+<generatorID>3E61B4E4-8830-7BC7-8306-2EF9E0A614B7</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<referedAttribute>73C8DD5F-F844-4707-804C-EC7B1E5FF539</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="IdProducto" id="3F4B1E17-7197-7F1D-D32B-F55F3162AC4F">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:30:20 UTC</createdTime>
+<generatorID>C98D311F-1D58-1471-8DB5-4573CA2E7DAD</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<referedAttribute>C8C95EF8-DFF3-3E8A-55F5-8198DCD5C8DA</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="BAC5A781-3654-FF9B-D34B-986536950FE7" name="Compras PK">

@@ -1,17 +1,17 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E7F08079-5924-C1AA-0933-33F0DE229A8A" name="Producto">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DBB9267C-51E8-764C-A9AE-274F24049181" name="Servicio">
 <createdBy>USUARIO</createdBy>
-<createdTime>2024-03-26 19:35:06 UTC</createdTime>
-<generatorID>417F78F1-5E8A-EF21-B972-3304C57D719B</generatorID>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>969CFE7C-4A16-B44B-4997-2F319ACB6B5E</generatorID>
 <ownerDesignName>Banco</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="IdServicio" id="C9BB3F83-9075-B753-62E3-034BEEA5E26C">
+<Column name="IdProducto" id="EE976E7E-626E-3CA0-038E-EAC206A8FAE9">
 <createdBy>USUARIO</createdBy>
 <createdTime>2024-03-28 05:37:48 UTC</createdTime>
-<generatorID>73C8DD5F-F844-4707-804C-EC7B1E5FF539</generatorID>
+<generatorID>C8C95EF8-DFF3-3E8A-55F5-8198DCD5C8DA</generatorID>
 <ownerDesignName>Banco</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -19,10 +19,10 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="Tipo" id="F358173A-7801-823C-8D5A-9A6E993AE901">
+<Column name="Tipo" id="2FBF7A29-2976-F4E8-1409-8C8F9B1D6D78">
 <createdBy>USUARIO</createdBy>
 <createdTime>2024-03-28 05:37:48 UTC</createdTime>
-<generatorID>8B6F6B6E-DF9C-EAB4-9434-2E2F8E422260</generatorID>
+<generatorID>DE850DC6-1FCC-2825-2523-F2D6678224FD</generatorID>
 <ownerDesignName>Banco</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -30,12 +30,11 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="Costo" id="7D2EC9FF-4568-CE95-AAD9-352A04B2DDE1">
+<Column name="Costo" id="E2FA9CD7-9C05-2830-519E-30B38C25484D">
 <createdBy>USUARIO</createdBy>
 <createdTime>2024-03-28 05:37:48 UTC</createdTime>
-<generatorID>B47DCEF8-D70B-4562-6AB3-768B5332AEA6</generatorID>
+<generatorID>298EBC87-542C-E874-3DA3-BBFF04489005</generatorID>
 <ownerDesignName>Banco</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT026</logicalDatatype>
@@ -44,10 +43,10 @@
 <ownDataTypeParameters>,12,2</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="Descripcion" id="9D7CF88A-94AB-363B-0284-6780A3E25FDE">
+<Column name="Descripcion" id="7DCE158E-FFB4-B6B0-FEA9-89F2BB359461">
 <createdBy>USUARIO</createdBy>
 <createdTime>2024-03-28 05:37:48 UTC</createdTime>
-<generatorID>7CE071F3-0339-F5AF-F28C-1178C8EB67B5</generatorID>
+<generatorID>B1EED800-0B9A-3131-103A-92C17DEEAEB7</generatorID>
 <ownerDesignName>Banco</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -58,16 +57,16 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="ED21DED6-F2B7-768A-CDB2-F6C05ADB3BC8" name="Producto_PK">
+<ind_PK_UK id="7FDA9FFB-C4BC-E31D-B83F-EC099300751E" name="Servicio_PK">
 <createdBy>USUARIO</createdBy>
 <createdTime>2024-03-28 05:37:48 UTC</createdTime>
-<generatorID>4DFF8659-8938-9AC8-C5C5-03D3B7C7AD6B</generatorID>
+<generatorID>6F7D1335-2212-83E6-73E2-177A087C2BEC</generatorID>
 <ownerDesignName>Banco</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="C9BB3F83-9075-B753-62E3-034BEEA5E26C"/>
+<colUsage columnID="EE976E7E-626E-3CA0-038E-EAC206A8FAE9"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

@@ -56,6 +56,51 @@
 <ownDataTypeParameters>40,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="Cliente_IdCliente" id="0BE0EF82-1D6A-603B-7D6F-57CD03763811">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>D184EB5D-2C83-70F0-6676-2A4A5654134A</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="80B43DE3-2ABA-1704-218E-DD594F6CF2D5" referredColumn="9CB0D8FE-EA26-D36C-764B-5724DEC0A578"/>
+</associations>
+</Column>
+<Column name="Producto_IdServicio" id="82C8D888-9199-3CFA-6092-4468EDB4CD3C">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>6DFBB52D-E792-3108-137C-B7E73A8A2649</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="CD3F1800-3BE3-C557-73C2-2C51BA560D64" referredColumn="C9BB3F83-9075-B753-62E3-034BEEA5E26C"/>
+</associations>
+</Column>
+<Column name="Servicio_IdProducto" id="41D5161F-08C6-67F7-7FA4-ABC1488EA4C0">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>3F4B1E17-7197-7F1D-D32B-F55F3162AC4F</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="DF0E08D1-7125-4A1A-C9DC-DAACDD70A1E0" referredColumn="EE976E7E-626E-3CA0-038E-EAC206A8FAE9"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="B469711E-74B3-A78B-AF49-8FB55474492E" name="Compras_PK">
@@ -68,6 +113,39 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="1DA7F51D-DB53-97A3-FB74-0AE81412B299"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="35938F3A-56DA-0767-3B73-8C75B7FE15CB" name="Compras_Cliente_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>C875E495-2CA9-C2D5-8EBE-88CD0F8E0DE8</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0BE0EF82-1D6A-603B-7D6F-57CD03763811"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="336D3263-B09F-C1A9-9BD4-65A457AC3B16" name="Compras_Producto_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>3E61B4E4-8830-7BC7-8306-2EF9E0A614B7</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="82C8D888-9199-3CFA-6092-4468EDB4CD3C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="25D1C6A7-69E5-28DE-EE4B-194F7139D5F5" name="Compras_Servicio_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>C98D311F-1D58-1471-8DB5-4573CA2E7DAD</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="41D5161F-08C6-67F7-7FA4-ABC1488EA4C0"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

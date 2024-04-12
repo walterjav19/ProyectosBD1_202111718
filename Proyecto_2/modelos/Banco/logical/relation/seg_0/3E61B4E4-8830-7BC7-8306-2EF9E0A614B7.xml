@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="PRO-COM" directorySegmentName="seg_0" id="3E61B4E4-8830-7BC7-8306-2EF9E0A614B7">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:29:35 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<sourcePk>4DFF8659-8938-9AC8-C5C5-03D3B7C7AD6B</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>417F78F1-5E8A-EF21-B972-3304C57D719B</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>5D91CA3B-3B23-AABD-73A7-7C42F296B8FD</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

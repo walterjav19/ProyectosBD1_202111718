@@ -54,6 +54,66 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="Deposito_Id_Deposito" id="15E53D59-3CE5-B312-49F4-93FEEDADF822">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>34A1A3C8-A14F-581D-6D74-B3B161376DF4</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="13AACC88-339A-CD36-193D-87DA18AB4D49" referredColumn="1C4B9B7F-FE69-415F-8798-D1591651A35A"/>
+</associations>
+</Column>
+<Column name="Debito_Id_Debito" id="3C4966F2-028B-911F-696D-CC9ADA61FAB3">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>9D1771E4-D5C6-3636-396A-DE58B65EDB85</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FAC4884E-28F0-87D2-526D-E7BA4A96AB9B" referredColumn="DA354DCD-949A-7DD9-F21B-B3B2DB012B21"/>
+</associations>
+</Column>
+<Column name="TipoTransaccion_CodigoTransaccion" id="2027AB6F-D9D2-EAF5-B144-9469308E3FC6">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>45F03037-7CB7-1949-C590-7577EE29B94D</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0805F7A8-5D3E-FD18-8F44-BED1EFC2458A" referredColumn="D80D42FD-3FA9-EE34-B965-CF6ACAF5C9DF"/>
+</associations>
+</Column>
+<Column name="Compras_Id_Compra" id="D4A47772-26D7-E7E5-9757-0798E6DCC5F0">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>6178B263-A076-84D6-9532-C9C00CB3007F</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="58D6B9E9-98B9-3DE4-4E2D-B70BB6722C49" referredColumn="1DA7F51D-DB53-97A3-FB74-0AE81412B299"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="59C75918-4E83-4182-4BF5-DD26934497CC" name="Transaccion_PK">
@@ -66,6 +126,50 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="DDA7AA37-6FFE-F8F1-6218-C57FD4796EF9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="65FB97A1-1629-CC37-78D4-8C9D5180DD35" name="Transaccion_Compras_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>0549AC7D-A275-DC9A-5A68-3A8F8E1EA6C1</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D4A47772-26D7-E7E5-9757-0798E6DCC5F0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CF380B15-D4B5-FFA5-591B-EEC344C4A3FF" name="Transaccion_Debito_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>5CFBDC2B-E8FA-FEAE-BC99-6B454D530DDD</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3C4966F2-028B-911F-696D-CC9ADA61FAB3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F1462480-04D3-9AFD-2CF6-A1A0CE33665C" name="Transaccion_Deposito_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>2778EA83-7C48-578E-80B6-B22D7EC1A239</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="15E53D59-3CE5-B312-49F4-93FEEDADF822"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8AB73F54-3C83-2EBC-8A41-232CFB1D900D" name="Transaccion_TipoTransaccion_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>F4DB7A13-2FEC-E911-8D66-DF38429E789D</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2027AB6F-D9D2-EAF5-B144-9469308E3FC6"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

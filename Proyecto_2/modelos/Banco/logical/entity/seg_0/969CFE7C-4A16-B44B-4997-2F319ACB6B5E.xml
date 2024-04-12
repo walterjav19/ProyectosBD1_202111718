@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="417F78F1-5E8A-EF21-B972-3304C57D719B" name="Producto">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="969CFE7C-4A16-B44B-4997-2F319ACB6B5E" name="Servicio">
 <createdBy>USUARIO</createdBy>
-<createdTime>2024-03-26 05:03:30 UTC</createdTime>
+<createdTime>2024-03-28 04:26:20 UTC</createdTime>
 <ownerDesignName>Banco</ownerDesignName>
 <engineerTo>
 <item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
@@ -15,9 +15,9 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="IdServicio" id="73C8DD5F-F844-4707-804C-EC7B1E5FF539">
+<Attribute name="IdProducto" id="C8C95EF8-DFF3-3E8A-55F5-8198DCD5C8DA">
 <createdBy>USUARIO</createdBy>
-<createdTime>2024-03-28 05:27:11 UTC</createdTime>
+<createdTime>2024-03-28 05:23:38 UTC</createdTime>
 <ownerDesignName>Banco</ownerDesignName>
 <engineerTo>
 <item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
@@ -27,9 +27,9 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Tipo" id="8B6F6B6E-DF9C-EAB4-9434-2E2F8E422260">
+<Attribute name="Tipo" id="DE850DC6-1FCC-2825-2523-F2D6678224FD">
 <createdBy>USUARIO</createdBy>
-<createdTime>2024-03-28 05:27:11 UTC</createdTime>
+<createdTime>2024-03-28 05:23:38 UTC</createdTime>
 <ownerDesignName>Banco</ownerDesignName>
 <engineerTo>
 <item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
@@ -39,14 +39,13 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Costo" id="B47DCEF8-D70B-4562-6AB3-768B5332AEA6">
+<Attribute name="Costo" id="298EBC87-542C-E874-3DA3-BBFF04489005">
 <createdBy>USUARIO</createdBy>
-<createdTime>2024-03-28 05:27:11 UTC</createdTime>
+<createdTime>2024-03-28 05:23:38 UTC</createdTime>
 <ownerDesignName>Banco</ownerDesignName>
 <engineerTo>
 <item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT026</logicalDatatype>
@@ -54,9 +53,9 @@
 <dataTypeScale>2</dataTypeScale>
 <ownDataTypeParameters>,12,2</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Descripcion" id="7CE071F3-0339-F5AF-F28C-1178C8EB67B5">
+<Attribute name="Descripcion" id="B1EED800-0B9A-3131-103A-92C17DEEAEB7">
 <createdBy>USUARIO</createdBy>
-<createdTime>2024-03-28 05:27:12 UTC</createdTime>
+<createdTime>2024-03-28 05:26:25 UTC</createdTime>
 <ownerDesignName>Banco</ownerDesignName>
 <engineerTo>
 <item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
@@ -69,9 +68,9 @@
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="4DFF8659-8938-9AC8-C5C5-03D3B7C7AD6B" name="Producto PK">
+<identifier id="6F7D1335-2212-83E6-73E2-177A087C2BEC" name="Servicio PK">
 <createdBy>USUARIO</createdBy>
-<createdTime>2024-03-28 05:27:27 UTC</createdTime>
+<createdTime>2024-03-28 05:25:01 UTC</createdTime>
 <ownerDesignName>Banco</ownerDesignName>
 <shouldEngineer>false</shouldEngineer>
 <engineerTo>
@@ -79,7 +78,7 @@
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>73C8DD5F-F844-4707-804C-EC7B1E5FF539</attributeRef>
+<attributeRef>C8C95EF8-DFF3-3E8A-55F5-8198DCD5C8DA</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

@@ -56,6 +56,21 @@
 <ownDataTypeParameters>40,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="Cliente_IdCliente" id="5AB41993-2E30-3489-E155-82E3BCC401D3">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>7406045E-88C3-3C6A-D180-AFDA222DA735</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C745411F-F865-6DBE-D0AF-1B5FC3E8EB2D" referredColumn="9CB0D8FE-EA26-D36C-764B-5724DEC0A578"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="8B54E88C-C0FE-7A6E-2FE3-8B38C1F4A39C" name="Debito_PK">
@@ -68,6 +83,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="DA354DCD-949A-7DD9-F21B-B3B2DB012B21"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="31FFF91D-FC1D-6EC3-6693-426C30D620E5" name="Debito_Cliente_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:37:48 UTC</createdTime>
+<generatorID>1B76809B-EFD3-A578-DCCD-60114D8EB09B</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5AB41993-2E30-3489-E155-82E3BCC401D3"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

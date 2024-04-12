@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="cmp-tra" directorySegmentName="seg_0" id="0549AC7D-A275-DC9A-5A68-3A8F8E1EA6C1">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-03-28 05:32:07 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<sourcePk>BAC5A781-3654-FF9B-D34B-986536950FE7</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>5D91CA3B-3B23-AABD-73A7-7C42F296B8FD</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>F6E53407-DFAD-0DCF-39D4-7E37EFE2EB40</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
