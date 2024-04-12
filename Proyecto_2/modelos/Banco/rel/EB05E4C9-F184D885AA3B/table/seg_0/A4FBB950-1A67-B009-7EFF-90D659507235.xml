@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A4FBB950-1A67-B009-7EFF-90D659507235" name="Correo">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-04-12 01:43:14 UTC</createdTime>
+<generatorID>27C1CEEF-8BA5-6F57-3753-2BC816F76CC7</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Cliente_IdCliente" id="CBDBBFD9-6882-1CAC-2E99-301EF9213479">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-04-12 01:43:14 UTC</createdTime>
+<generatorID>2FA00E83-0EF6-5DFF-E593-1EE0D695065C</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="54A5D9BE-65CC-6407-BA1C-10DB7134FE0F" referredColumn="9CB0D8FE-EA26-D36C-764B-5724DEC0A578"/>
+</associations>
+</Column>
+<Column name="Correo" id="13AE314A-FDF6-C7B0-6BFD-495DF0B0D2C6">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-04-12 01:43:14 UTC</createdTime>
+<generatorID>285EC319-1FB5-396D-C819-8077210D8118</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40</dataTypeSize>
+<ownDataTypeParameters>40,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2DB93BF9-F084-88F5-A568-7436D5286619" name="Correo_Cliente_FK">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-04-12 01:43:14 UTC</createdTime>
+<generatorID>D0C7273B-179C-55A2-6225-A99108E129EF</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CBDBBFD9-6882-1CAC-2E99-301EF9213479"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
