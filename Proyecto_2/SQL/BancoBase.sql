@@ -17,6 +17,7 @@ Nombre VARCHAR(40) NOT NULL,
 Apellido VARCHAR(40) NOT NULL,
 Usuario VARCHAR(40) NOT NULL,
 Contrasena VARCHAR(200) NOT NULL,
+Fecha_Creacion DATETIME,
 TipoCliente INTEGER(10) NOT NULL,
 FOREIGN KEY (TipoCliente) REFERENCES TipoCliente(idTipo)
 );
@@ -29,7 +30,7 @@ FOREIGN KEY (IdCliente)  REFERENCES Cliente(IdCliente)
 );
 
 DROP TABLE IF EXISTS Correo;
-CREATE TABLE Telefono(
+CREATE TABLE Correo(
 IdCliente INTEGER,
 Correo VARCHAR(40) NOT NULL,
 FOREIGN KEY (IdCliente)  REFERENCES Cliente(IdCliente)
