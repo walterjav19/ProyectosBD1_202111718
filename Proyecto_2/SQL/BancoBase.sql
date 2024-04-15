@@ -46,11 +46,11 @@ CREATE TABLE TipoCuenta(
 
 DROP TABLE IF EXISTS Cuenta;
 CREATE TABLE Cuenta(
-    IdCuenta INTEGER PRIMARY KEY,
+    IdCuenta BIGINT PRIMARY KEY,
     Monto_Apertura DECIMAL(12,2) NOT NULL,
     Saldo_Cuenta DECIMAL(12,2) NOT NULL,
     Descripcion VARCHAR(50) NOT NULL,
-    Fecha_Apertura DATE NOT NULL,
+    Fecha_Apertura DATETIME NOT NULL,
     Detalle VARCHAR(100),
     TipoCuenta INTEGER NOT NULL,
     IdCliente INTEGER NOT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE Transaccion(
     IdCompra INTEGER,
     IdDeposito INTEGER,
     IdDebito INTEGER,
-    IdCuenta INTEGER NOT NULL,
+    IdCuenta BIGINT NOT NULL,
     FOREIGN KEY (TipoTransaccion) REFERENCES TipoTransaccion(CodigoTransaccion),
     FOREIGN KEY (IdCompra) REFERENCES Compra(IdCompra),
     FOREIGN KEY (IdDeposito) REFERENCES Deposito(IdDeposito),

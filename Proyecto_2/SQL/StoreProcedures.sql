@@ -3,6 +3,8 @@ USE Banco;
 DROP PROCEDURE IF EXISTS registrarTipoCliente;
 DROP PROCEDURE IF EXISTS registrarTipoCuenta;
 DROP PROCEDURE IF EXISTS registrarCliente;
+DROP PROCEDURE IF EXISTS registrarCuenta;
+DROP PROCEDURE IF EXISTS crearProductoServicio;
 
 DELIMITER //
 
@@ -59,13 +61,20 @@ BEGIN
 	DECLARE telefono_actual VARCHAR(20);
     DECLARE telefono_insertar VARCHAR(20);
     DECLARE posicion_guion INT;
-	DECLARE correo_actual VARCHAR(20);
+	DECLARE correo_actual VARCHAR(40);
     DECLARE posicion_or INT;
     
     SET autocommit = 0;
     
     COMMIT; -- guardamos el punto de restauracion
     
+	IF EXISTS (SELECT * FROM Cliente WHERE IdCliente =c_Id) THEN
+        SET autocommit = 1;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El ID de cliente ya está en uso. Por favor, elija otro.';
+    END IF;
+
+
     IF NOT c_Nombre REGEXP '^[a-zA-ZñÑ., ]+$' THEN
 		SET autocommit = 1;
         SIGNAL SQLSTATE '45000'
@@ -146,6 +155,117 @@ BEGIN
     
 END//
 
+CREATE PROCEDURE registrarCuenta(
+    IN c_Id BIGINT,
+    IN c_MontoApertura DECIMAL(12,2),
+    IN c_Saldo DECIMAL(12,2),
+    IN c_Descripcion VARCHAR(50),
+    IN c_FechaApertura VARCHAR(100),
+    IN c_OtrosDetalles VARCHAR(100),
+    IN c_TipoCuenta INTEGER,
+    IN c_IdCliente INTEGER
+)
+BEGIN
+    IF EXISTS (SELECT * FROM Cuenta WHERE IdCuenta =c_Id) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El numero de cuenta ya existe.';
+    END IF;
+
+    IF c_MontoApertura<0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El monto de apertura no puede ser negativo.';
+    END IF;
+
+    IF c_Saldo<0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El saldo no puede ser negativo.';
+    END IF;
+
+    -- Insertar la fecha del sistema si la fecha proporcionada es nula o vacía
+    IF c_FechaApertura IS NULL OR c_FechaApertura = '' THEN
+        SET c_FechaApertura = NOW(); -- NOW() devuelve la fecha y hora actuales
+    ELSE
+		SET c_FechaApertura=STR_TO_DATE(c_FechaApertura, '%d/%m/%Y %H:%i:%s');
+	END IF;
+
+
+    IF NOT EXISTS (SELECT * FROM TipoCuenta WHERE Codigo =c_TipoCuenta) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El tipo de cuenta asociado no existe.';
+    END IF;
+
+    IF NOT EXISTS (SELECT * FROM Cliente WHERE IdCliente =c_IdCliente) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El cliente asociado no existe.';
+    END IF;
+    
+    IF c_MontoApertura<>c_Saldo THEN
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Saldo No coincide con el monto de apertura.';
+    END IF;
+    
+    IF  c_OtrosDetalles='' THEN
+		set c_OtrosDetalles=NULL;
+    END IF;
+
+    INSERT INTO Cuenta (IdCuenta, Monto_Apertura, Saldo_Cuenta, Descripcion, Fecha_Apertura, Detalle, TipoCuenta, IdCliente) VALUES (c_Id, c_MontoApertura, c_Saldo, c_Descripcion, c_FechaApertura, c_OtrosDetalles, c_TipoCuenta, c_IdCliente);
+  
+
+
+
+END//
+
+CREATE PROCEDURE crearProductoServicio(
+    IN ps_Cod INTEGER,
+    IN Tipo INTEGER,
+    IN Costo DECIMAL(12,2),
+    IN Descripcion VARCHAR(100)
+)
+BEGIN
+    IF EXISTS(SELECT * FROM Producto WHERE IdProducto=ps_Cod )THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'id ya esta Ocupado por Un producto';
+    END IF;
+
+    IF EXISTS(SELECT * FROM Servicio WHERE IdServicio=ps_Cod )THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'id ya esta Ocupado por Un Servicio';
+    END IF;
+
+    IF TIPO<1 OR TIPO>2 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Tipo de producto o servicio no valido unicamente 1-2';
+    END IF;
+
+    IF TIPO=1 THEN
+        IF COSTO<0 THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Costo de un servicio no puede ser negativo';
+        END IF;
+
+        IF COSTO=NULL OR COSTO=0 OR COSTO='' THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Costo de un servicio no puede ser nulo ni cero';
+        END IF;
+
+        INSERT INTO Servicio (IdServicio, Tipo, Costo, Descripcion) VALUES (ps_Cod, Tipo, Costo, Descripcion);
+    ELSE
+        IF COSTO<0 OR COSTO>0 THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Costo de un producto debe ser variable';
+        END IF;
+
+        IF COSTO=NULL OR COSTO=0 OR COSTO='' THEN
+            SET COSTO=NULL;
+        END IF;
+
+
+        INSERT INTO Producto (IdProducto, Tipo, Costo, Descripcion) VALUES (ps_Cod, Tipo, Costo, Descripcion);
+    END IF;
+
+
+END//
+
 DELIMITER ;
 
 
@@ -165,10 +285,28 @@ CALL registrarTipoCuenta(0,'Cuenta de Inversión','Orientada a inversionistas, o
 
 CALL registrarCliente(1001, 'Juan Isaac','Perez Lopez','50322888080-65436756','micorreo@gmail.com','jisaacp20243','12345678','2' );
 call registrarCliente(1002, 'Maria Isabel','Gonzalez Perez','22805050-22808080','micorreo1@gmail.com|micorreo2@gmail.com','mariauser','12345679','2' );
-CALL registrarCliente(1003, 'Juan Manuel','Perez Lopez','50322888080-65432121-50287654321-22888080','micorreo@gmail.net|sapo@gmail.net|micorreo@gmail.com','jisaacp260243','12345678','1' );
+CALL registrarCliente(1003, 'Walter Javier','Santizo Mazriegos','50259663187-45575187-502876543','walterjav19@gmail.com|w.javiersantizo@hotmail.com|hola@yopmail.com','walterjav19','cientificojoven','3' );
+
+-- registro de cuenta
+--               idcuenta, montoapertura,*saldo, descripcion,     fechaapertura,otrosdetalles,idtipocuenta,idcliente
+CALL registrarCuenta(3030206080, 800.00, 800.00, 'Apertura de cuenta con Q500','','',5,1002);
+CALL registrarCuenta(3030206081, 600.00, 600.00, 'Apertura de cuenta con Q500','01/04/2024 07:00:00','esta apertura tiene fecha',5,1001);
+
+-- registro de productoservicio
+--                    id, tipo, costo, descripcion
+CALL crearProductoServicio(18, 1, 50.80, 'Este es un servicio el cual tiene un precio predefinido'); -- servicio
+CALL crearProductoServicio(19, 2, 0, 'Este es un producto el cual tiene un precio variable'); -- producto, tiene un precio de "cero" el cual indica que es variable
+CALL crearProductoServicio(9, 2,0, 'Este es un producto el cual tiene un precio variable'); -- producto, tiene un precio de "cero" el cual indica que es variable
+
+
+
 
 SELECT * from tipocliente;
 SELECT * FROM Cliente;
 SELECT * FROM Telefono;
 SELECT * FROM Correo;
+SELECT * FROM Cuenta;
 SELECT * from TipoCuenta;
+SELECT * FROM servicio;
+SELECT * FROM  producto;
+
