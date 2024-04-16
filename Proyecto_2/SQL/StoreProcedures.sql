@@ -276,7 +276,7 @@ CREATE PROCEDURE realizarCompra(
 BEGIN
     DECLARE tipo_producto INT;
     DECLARE costops DECIMAL(12,2);
-
+	DECLARE saldo_actual DECIMAL(12,2);
 
     SET c_Fecha=STR_TO_DATE(c_Fecha, '%d/%m/%Y');
 
@@ -332,9 +332,59 @@ BEGIN
                 SIGNAL SQLSTATE '45000'
                 SET MESSAGE_TEXT = 'El precio de un producto debe ser variable';
             END IF;
-    
-            INSERT INTO Compra (IdCompra, Fecha, Importe, Detalle, IdProductoServicio, IdCliente) VALUES (c_IdCompra, c_Fecha, c_Importe, c_Detalle, c_IdProductoServicio, c_IdCliente);
+			
+            SET costops=c_Importe;
+            INSERT INTO Compra (IdCompra, Fecha, Importe, Detalle, IdProductoServicio, IdCliente) VALUES (c_IdCompra, c_Fecha, costops, c_Detalle, c_IdProductoServicio, c_IdCliente);
     END IF;
+	
+    
+	-- Actualizar el saldo de la cuenta
+    SELECT Saldo_Cuenta INTO saldo_actual FROM Cuenta WHERE IdCliente = c_IdCliente;
+    IF (saldo_actual - costops) < 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Fondos insuficientes en la cuenta para realizar la compra.';
+    ELSE
+        UPDATE Cuenta SET Saldo_Cuenta = saldo_actual - costops WHERE IdCliente = c_IdCliente;
+    END IF;
+
+END//
+
+CREATE PROCEDURE realizarDeposito(
+    IN d_IdDeposito INTEGER,
+    IN d_Fecha VARCHAR(30),
+    IN d_Importe DECIMAL(12,2),
+    IN d_Detalle VARCHAR(40),
+    IN d_IdCliente INTEGER
+)
+BEGIN
+    
+    SET d_Fecha=STR_TO_DATE(d_Fecha, '%d/%m/%Y');
+
+    IF EXISTS (SELECT * FROM Deposito WHERE IdDeposito = d_IdDeposito) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El ID de depósito ya está en uso. Por favor, elija otro.';
+    END IF;
+
+    IF d_Importe<=0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El importe del depósito debe ser mayor a cero.';
+    END IF;
+
+    IF NOT EXISTS(SELECT * FROM Cliente WHERE IdCliente=d_IdCliente) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El cliente asociado no existe.';
+    END IF;
+
+
+    IF d_Detalle='' THEN
+        SET d_Detalle=NULL;
+    END IF;
+
+    INSERT INTO Deposito (IdDeposito, Fecha,Monto, Detalle, IdCliente) VALUES (d_IdDeposito, d_Fecha, d_Importe, d_Detalle, d_IdCliente);
+
+    -- ACTUALIZAMOS LA CUENTA
+    UPDATE Cuenta SET Saldo_Cuenta = Saldo_Cuenta + d_Importe WHERE IdCliente = d_IdCliente;
+
 
 
 END//
@@ -392,6 +442,16 @@ CALL crearProductoServicio(19,'Producto Extra', 2, 0, 'Este es un producto el cu
 --                  id,      fecha,   monto,  otrosdetalles, codProducto/Servicio, idcliente
 CALL realizarCompra(1111, '10/04/2024', 0, 'compra de servicio', 18, 1001); -- aqui hay error ya que el monto deberia de ser cero por que ya tiene un precio preestablecido por ser un servicio
 call realizarCompra(1113, '10/04/2024', 34, 'compra de producto', 19, 1001); -- aqui esta correcto ya que el monto es mayor a cero y es un producto
+call realizarCompra(1114, '10/04/2024', 0, 'compra de producto', 8, 1001);
+-- call realizarCompra(1115, '10/04/2024', 0, 'compra de producto', 8, 1001); -- cuenta sin saldo
+
+
+-- realizar deposito
+--              id,      fecha,     monto,  otrosdetalles, idcliente
+CALL realizarDeposito(1114, '10/04/2024', 100, 'deposito de dinero', 1001);
+CALL realizarDeposito(1115, '10/04/2024', 21, 'deposito de dinero', 1001); -- aqui hay error ya que el monto deberia de ser mayor a cero
+
+
 
 SELECT * from tipocliente;
 SELECT * FROM Cliente;
@@ -401,4 +461,5 @@ SELECT * FROM Cuenta;
 SELECT * from TipoCuenta;
 SELECT * FROM productoservicio;
 SELECT * FROM compra;
+SELECT * FROM Deposito;
 
