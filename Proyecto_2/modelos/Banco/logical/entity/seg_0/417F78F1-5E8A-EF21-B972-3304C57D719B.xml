@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="417F78F1-5E8A-EF21-B972-3304C57D719B" name="Producto">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="417F78F1-5E8A-EF21-B972-3304C57D719B" name="ProductoServicio">
 <createdBy>USUARIO</createdBy>
 <createdTime>2024-03-26 05:03:30 UTC</createdTime>
 <ownerDesignName>Banco</ownerDesignName>
@@ -15,7 +15,7 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="IdServicio" id="73C8DD5F-F844-4707-804C-EC7B1E5FF539">
+<Attribute name="IdProdServ" id="73C8DD5F-F844-4707-804C-EC7B1E5FF539">
 <createdBy>USUARIO</createdBy>
 <createdTime>2024-03-28 05:27:11 UTC</createdTime>
 <ownerDesignName>Banco</ownerDesignName>
@@ -26,6 +26,19 @@
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nombre" id="B2E58386-D411-6CD6-50B1-1D155FAB1EC2">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-04-16 02:40:33 UTC</createdTime>
+<ownerDesignName>Banco</ownerDesignName>
+<engineerTo>
+<item key="EB05E4C9-8150-7512-A245-F184D885AA3B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="Tipo" id="8B6F6B6E-DF9C-EAB4-9434-2E2F8E422260">
 <createdBy>USUARIO</createdBy>
