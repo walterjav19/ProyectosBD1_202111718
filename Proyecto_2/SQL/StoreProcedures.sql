@@ -217,20 +217,18 @@ END//
 
 CREATE PROCEDURE crearProductoServicio(
     IN ps_Cod INTEGER,
+    IN ps_Nombre VARCHAR(60),
     IN Tipo INTEGER,
     IN Costo DECIMAL(12,2),
     IN Descripcion VARCHAR(100)
 )
 BEGIN
-    IF EXISTS(SELECT * FROM Producto WHERE IdProducto=ps_Cod )THEN
+    IF EXISTS(SELECT * FROM ProductoServicio WHERE IdProductoServicio=ps_Cod )THEN
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'id ya esta Ocupado por Un producto';
+        SET MESSAGE_TEXT = 'id ya esta Ocupado por Un producto o Servicio';
     END IF;
 
-    IF EXISTS(SELECT * FROM Servicio WHERE IdServicio=ps_Cod )THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'id ya esta Ocupado por Un Servicio';
-    END IF;
+
 
     IF TIPO<1 OR TIPO>2 THEN
         SIGNAL SQLSTATE '45000'
@@ -243,12 +241,12 @@ BEGIN
             SET MESSAGE_TEXT = 'Costo de un servicio no puede ser negativo';
         END IF;
 
-        IF COSTO=NULL OR COSTO=0 OR COSTO='' THEN
+        IF COSTO IS NULL OR COSTO=0 THEN
             SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'Costo de un servicio no puede ser nulo ni cero';
         END IF;
 
-        INSERT INTO Servicio (IdServicio, Tipo, Costo, Descripcion) VALUES (ps_Cod, Tipo, Costo, Descripcion);
+        INSERT INTO ProductoServicio (IdProductoServicio,Nombre, Tipo, Costo, Descripcion) VALUES (ps_Cod,ps_Nombre, Tipo, Costo, Descripcion);
     ELSE
         IF COSTO<0 OR COSTO>0 THEN
             SIGNAL SQLSTATE '45000'
@@ -260,7 +258,82 @@ BEGIN
         END IF;
 
 
-        INSERT INTO Producto (IdProducto, Tipo, Costo, Descripcion) VALUES (ps_Cod, Tipo, Costo, Descripcion);
+        INSERT INTO ProductoServicio (IdProductoServicio,Nombre, Tipo, Costo, Descripcion) VALUES (ps_Cod,ps_Nombre, Tipo, Costo, Descripcion);
+    END IF;
+
+
+END//
+
+
+CREATE PROCEDURE realizarCompra(
+    IN c_IdCompra INTEGER,
+    IN c_Fecha VARCHAR(30),
+    IN c_Importe DECIMAL(12,2),
+    IN c_Detalle VARCHAR(40),
+    IN c_IdProductoServicio INTEGER,
+    IN c_IdCliente INTEGER
+)
+BEGIN
+    DECLARE tipo_producto INT;
+    DECLARE costops DECIMAL(12,2);
+
+
+    SET c_Fecha=STR_TO_DATE(c_Fecha, '%d/%m/%Y');
+
+    IF EXISTS(SELECT * FROM Compra WHERE IdCompra=c_IdCompra) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El ID de compra ya está en uso. Por favor, elija otro.';
+    END IF;
+
+    IF NOT EXISTS(SELECT * FROM ProductoServicio WHERE IdProductoServicio=c_IdProductoServicio) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El servicio o producto asociado no existe.';
+    END IF;
+
+
+
+    IF NOT EXISTS(SELECT * FROM Cliente WHERE IdCliente=c_IdCliente) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El cliente asociado no existe.';
+    END IF;
+
+    IF c_Detalle='' THEN
+        SET c_Detalle=NULL;
+    END IF;
+
+    SELECT Tipo INTO tipo_producto FROM ProductoServicio WHERE IdProductoServicio = c_IdProductoServicio;
+
+    IF tipo_producto=1 THEN -- servicio
+
+        IF c_Importe<0 THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El importe de un servicio no puede ser negativo';
+        END IF;
+
+        IF NOT c_Importe=0 OR c_Importe is NULL THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El precio de un servicio ya esta predefinido no puede ser variable';
+        END IF;
+
+        SELECT Costo INTO costops FROM ProductoServicio WHERE IdProductoServicio = c_IdProductoServicio;
+
+        INSERT INTO Compra (IdCompra, Fecha, Importe, Detalle, IdProductoServicio, IdCliente) VALUES (c_IdCompra, c_Fecha, costops, c_Detalle, c_IdProductoServicio, c_IdCliente);
+
+    END IF;
+
+    IF tipo_producto=2 THEN -- producto
+            
+            IF c_Importe<0 THEN
+                SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'El importe de un producto no puede ser negativo';
+            END IF;
+    
+            IF c_Importe=0 THEN
+                SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'El precio de un producto debe ser variable';
+            END IF;
+    
+            INSERT INTO Compra (IdCompra, Fecha, Importe, Detalle, IdProductoServicio, IdCliente) VALUES (c_IdCompra, c_Fecha, c_Importe, c_Detalle, c_IdProductoServicio, c_IdCliente);
     END IF;
 
 
@@ -293,13 +366,32 @@ CALL registrarCuenta(3030206080, 800.00, 800.00, 'Apertura de cuenta con Q500','
 CALL registrarCuenta(3030206081, 600.00, 600.00, 'Apertura de cuenta con Q500','01/04/2024 07:00:00','esta apertura tiene fecha',5,1001);
 
 -- registro de productoservicio
---                    id, tipo, costo, descripcion
-CALL crearProductoServicio(18, 1, 50.80, 'Este es un servicio el cual tiene un precio predefinido'); -- servicio
-CALL crearProductoServicio(19, 2, 0, 'Este es un producto el cual tiene un precio variable'); -- producto, tiene un precio de "cero" el cual indica que es variable
-CALL crearProductoServicio(9, 2,0, 'Este es un producto el cual tiene un precio variable'); -- producto, tiene un precio de "cero" el cual indica que es variable
+--                         id, tipo, costo, descripcion
+CALL crearProductoServicio(1,'Servicio de tarjeta de debito',1,10,'tipo 1');
+CALL crearProductoServicio(2,'Servicio de chequera',1,10,'tipo 1');
+CALL crearProductoServicio(3,'Servicio de asesoramiento financiero',1,400,'tipo 1');
+CALL crearProductoServicio(4,'Servicio de banca personal',1,5,'tipo 1');
+CALL crearProductoServicio(5,'Seguro de Vida',1,30,'tipo 1');
+CALL crearProductoServicio(6,'Seguro de vida plus',1,100,'tipo 1');
+CALL crearProductoServicio(7,'Seguro de automovil',1,300,'tipo 1');
+CALL crearProductoServicio(8,'Seguro de automovil plus',1,500,'tipo 1');
+CALL crearProductoServicio(9,'Servicio de Deposito',1,0.05,'tipo 1');
+CALL crearProductoServicio(10,'Servicio de Debito',1,0.10,'tipo 1');
+-- productos
+CALL crearProductoServicio(11,'Pago de energía Eléctrica (EEGSA)',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
+CALL crearProductoServicio(12,'Pago de agua potable (EMPAGUA)',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
+CALL crearProductoServicio(13,'Pago de Matricula USAC',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
+CALL crearProductoServicio(14,'Pago de Curso Vacaciones Usac ',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
+CALL crearProductoServicio(15,'Pago de servicio de internet',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
+CALL crearProductoServicio(16,'Servicio de suscripción plataformas streaming',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
+CALL crearProductoServicio(17,'Servicios Cloud',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
+CALL crearProductoServicio(18,'Servicio Extra', 1, 53.80, 'Este es un servicio el cual tiene un precio predefinido');
+CALL crearProductoServicio(19,'Producto Extra', 2, 0, 'Este es un producto el cual tiene un precio variable'); -- producto, tiene un precio de "cero" el cual indica que es variable
 
-
-
+-- realizar compra
+--                  id,      fecha,   monto,  otrosdetalles, codProducto/Servicio, idcliente
+CALL realizarCompra(1111, '10/04/2024', 0, 'compra de servicio', 18, 1001); -- aqui hay error ya que el monto deberia de ser cero por que ya tiene un precio preestablecido por ser un servicio
+call realizarCompra(1113, '10/04/2024', 34, 'compra de producto', 19, 1001); -- aqui esta correcto ya que el monto es mayor a cero y es un producto
 
 SELECT * from tipocliente;
 SELECT * FROM Cliente;
@@ -307,6 +399,6 @@ SELECT * FROM Telefono;
 SELECT * FROM Correo;
 SELECT * FROM Cuenta;
 SELECT * from TipoCuenta;
-SELECT * FROM servicio;
-SELECT * FROM  producto;
+SELECT * FROM productoservicio;
+SELECT * FROM compra;
 

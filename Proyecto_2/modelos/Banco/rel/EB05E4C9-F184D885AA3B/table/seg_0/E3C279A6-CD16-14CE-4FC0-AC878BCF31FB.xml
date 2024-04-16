@@ -97,9 +97,6 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="DF0E08D1-7125-4A1A-C9DC-DAACDD70A1E0" referredColumn="EE976E7E-626E-3CA0-038E-EAC206A8FAE9"/>
-</associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
@@ -135,17 +132,6 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="82C8D888-9199-3CFA-6092-4468EDB4CD3C"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="25D1C6A7-69E5-28DE-EE4B-194F7139D5F5" name="Compras_Servicio_FK">
-<createdBy>USUARIO</createdBy>
-<createdTime>2024-03-28 05:37:48 UTC</createdTime>
-<generatorID>C98D311F-1D58-1471-8DB5-4573CA2E7DAD</generatorID>
-<ownerDesignName>Banco</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="41D5161F-08C6-67F7-7FA4-ABC1488EA4C0"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

@@ -58,21 +58,15 @@ CREATE TABLE Cuenta(
     FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente)
 );
 
-DROP TABLE IF EXISTS Producto;
-CREATE TABLE Producto(
-    IdProducto INTEGER PRIMARY KEY,
+DROP TABLE IF EXISTS ProductoServicio;
+CREATE TABLE ProductoServicio(
+    IdProductoServicio INTEGER PRIMARY KEY,
+    Nombre VARCHAR(60) NOT NULL,
     Tipo INTEGER NOT NULL,
     Costo DECIMAL(12,2),
     Descripcion VARCHAR(100) NOT NULL
 );
 
-DROP TABLE IF EXISTS Servicio;
-CREATE TABLE Servicio(
-    IdServicio INTEGER PRIMARY KEY,
-    Tipo INTEGER NOT NULL,
-    Costo DECIMAL(12,2) NOT NULL,
-    Descripcion VARCHAR(100) NOT NULL
-);
 
 DROP TABLE IF EXISTS Compra;
 CREATE TABLE Compra(
@@ -80,11 +74,9 @@ CREATE TABLE Compra(
     Fecha DATE NOT NULL,
     Importe DECIMAL(12,2),
     Detalle VARCHAR(40),
-    IdProducto INTEGER NOT NULL,
-    IdServicio INTEGER NOT NULL,
+    IdProductoServicio INTEGER NOT NULL,
     IdCliente INTEGER NOT NULL,
-    FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto),
-    FOREIGN KEY (IdServicio) REFERENCES Servicio(IdServicio),
+    FOREIGN KEY (IdProductoServicio) REFERENCES ProductoServicio(IdProductoServicio),
     FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente)
 );
 

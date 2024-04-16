@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E7F08079-5924-C1AA-0933-33F0DE229A8A" name="Producto">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E7F08079-5924-C1AA-0933-33F0DE229A8A" name="ProductoServicio">
 <createdBy>USUARIO</createdBy>
 <createdTime>2024-03-26 19:35:06 UTC</createdTime>
 <generatorID>417F78F1-5E8A-EF21-B972-3304C57D719B</generatorID>
@@ -8,7 +8,7 @@
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="IdServicio" id="C9BB3F83-9075-B753-62E3-034BEEA5E26C">
+<Column name="IdProdServ" id="C9BB3F83-9075-B753-62E3-034BEEA5E26C">
 <createdBy>USUARIO</createdBy>
 <createdTime>2024-03-28 05:37:48 UTC</createdTime>
 <generatorID>73C8DD5F-F844-4707-804C-EC7B1E5FF539</generatorID>
@@ -54,6 +54,18 @@
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>100</dataTypeSize>
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nombre" id="DFD978A8-2161-878F-7703-553A8BDB937C">
+<createdBy>USUARIO</createdBy>
+<createdTime>2024-04-16 02:49:41 UTC</createdTime>
+<generatorID>B2E58386-D411-6CD6-50B1-1D155FAB1EC2</generatorID>
+<ownerDesignName>Banco</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>
