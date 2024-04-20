@@ -5,6 +5,10 @@ DROP PROCEDURE IF EXISTS registrarTipoCuenta;
 DROP PROCEDURE IF EXISTS registrarCliente;
 DROP PROCEDURE IF EXISTS registrarCuenta;
 DROP PROCEDURE IF EXISTS crearProductoServicio;
+DROP PROCEDURE IF EXISTS realizarCompra;
+DROP PROCEDURE IF EXISTS realizarDeposito;
+DROP PROCEDURE IF EXISTS realizarDebito;
+DROP PROCEDURE IF EXISTS registrarTipoTransaccion;
 
 DELIMITER //
 
@@ -217,7 +221,6 @@ END//
 
 CREATE PROCEDURE crearProductoServicio(
     IN ps_Cod INTEGER,
-    IN ps_Nombre VARCHAR(60),
     IN Tipo INTEGER,
     IN Costo DECIMAL(12,2),
     IN Descripcion VARCHAR(100)
@@ -246,7 +249,7 @@ BEGIN
             SET MESSAGE_TEXT = 'Costo de un servicio no puede ser nulo ni cero';
         END IF;
 
-        INSERT INTO ProductoServicio (IdProductoServicio,Nombre, Tipo, Costo, Descripcion) VALUES (ps_Cod,ps_Nombre, Tipo, Costo, Descripcion);
+        INSERT INTO ProductoServicio (IdProductoServicio, Tipo, Costo, Descripcion) VALUES (ps_Cod, Tipo, Costo, Descripcion);
     ELSE
         IF COSTO<0 OR COSTO>0 THEN
             SIGNAL SQLSTATE '45000'
@@ -258,7 +261,7 @@ BEGIN
         END IF;
 
 
-        INSERT INTO ProductoServicio (IdProductoServicio,Nombre, Tipo, Costo, Descripcion) VALUES (ps_Cod,ps_Nombre, Tipo, Costo, Descripcion);
+        INSERT INTO ProductoServicio (IdProductoServicio, Tipo, Costo, Descripcion) VALUES (ps_Cod, Tipo, Costo, Descripcion);
     END IF;
 
 
@@ -278,7 +281,13 @@ BEGIN
     DECLARE costops DECIMAL(12,2);
 	DECLARE saldo_actual DECIMAL(12,2);
 
-    SET c_Fecha=STR_TO_DATE(c_Fecha, '%d/%m/%Y');
+    
+
+    IF c_Fecha IS NULL OR c_Fecha='' THEN
+        SET c_Fecha=DATE_FORMAT(CURDATE(), '%Y-%m-%d');
+    ELSE
+        SET c_Fecha=STR_TO_DATE(c_Fecha, '%d/%m/%Y');
+    END IF;
 
     IF EXISTS(SELECT * FROM Compra WHERE IdCompra=c_IdCompra) THEN
         SIGNAL SQLSTATE '45000'
@@ -338,14 +347,14 @@ BEGIN
     END IF;
 	
     
-	-- Actualizar el saldo de la cuenta
+	/* -- Actualizar el saldo de la cuenta
     SELECT Saldo_Cuenta INTO saldo_actual FROM Cuenta WHERE IdCliente = c_IdCliente;
     IF (saldo_actual - costops) < 0 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Fondos insuficientes en la cuenta para realizar la compra.';
     ELSE
         UPDATE Cuenta SET Saldo_Cuenta = saldo_actual - costops WHERE IdCliente = c_IdCliente;
-    END IF;
+    END IF;*/
 
 END//
 
@@ -358,7 +367,11 @@ CREATE PROCEDURE realizarDeposito(
 )
 BEGIN
     
-    SET d_Fecha=STR_TO_DATE(d_Fecha, '%d/%m/%Y');
+    IF d_Fecha IS NULL OR d_Fecha='' THEN
+        SET d_Fecha=DATE_FORMAT(CURDATE(), '%Y-%m-%d');
+    ELSE
+        SET d_Fecha=STR_TO_DATE(d_Fecha, '%d/%m/%Y');
+    END IF;
 
     IF EXISTS (SELECT * FROM Deposito WHERE IdDeposito = d_IdDeposito) THEN
         SIGNAL SQLSTATE '45000'
@@ -382,14 +395,153 @@ BEGIN
 
     INSERT INTO Deposito (IdDeposito, Fecha,Monto, Detalle, IdCliente) VALUES (d_IdDeposito, d_Fecha, d_Importe, d_Detalle, d_IdCliente);
 
-    -- ACTUALIZAMOS LA CUENTA
-    UPDATE Cuenta SET Saldo_Cuenta = Saldo_Cuenta + d_Importe WHERE IdCliente = d_IdCliente;
+    /*-- ACTUALIZAMOS LA CUENTA
+    UPDATE Cuenta SET Saldo_Cuenta = Saldo_Cuenta + d_Importe WHERE IdCliente = d_IdCliente;*/
 
 
 
 END//
 
+
+CREATE PROCEDURE realizarDebito(
+    IN d_IdDebito INTEGER,
+    IN d_Fecha VARCHAR(30),
+    IN d_Importe DECIMAL(12,2),
+    IN d_Detalle VARCHAR(40),
+    IN d_IdCliente INTEGER
+)
+BEGIN
+    
+
+
+    IF d_Fecha IS NULL OR d_Fecha='' THEN
+        SET d_Fecha=DATE_FORMAT(CURDATE(), '%Y-%m-%d');
+    ELSE
+        SET d_Fecha=STR_TO_DATE(d_Fecha, '%d/%m/%Y');
+    END IF;
+
+    IF EXISTS (SELECT * FROM Debito WHERE IdDebito = d_IdDebito) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El ID de débito ya está en uso. Por favor, elija otro.';
+    END IF;
+
+    IF d_Importe<=0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El importe del débito debe ser mayor a cero.';
+    END IF;
+
+    IF NOT EXISTS(SELECT * FROM Cliente WHERE IdCliente=d_IdCliente) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El cliente asociado no existe.';
+    END IF;
+
+    IF d_Detalle='' THEN
+        SET d_Detalle=NULL;
+    END IF;
+
+    INSERT INTO Debito (IdDebito, Fecha, Monto, Detalle, IdCliente) VALUES (d_IdDebito, d_Fecha, d_Importe, d_Detalle, d_IdCliente);
+
+
+END//
+
+CREATE PROCEDURE registrarTipoTransaccion(
+    IN t_Id INTEGER,
+    IN t_Nombre VARCHAR(40),
+    IN t_Descripcion VARCHAR(120)
+)
+BEGIN
+    IF EXISTS (SELECT * FROM TipoTransaccion WHERE Nombre = t_Nombre) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El nombre ya está en uso. Por favor, elija otro.';
+    END IF;
+
+    INSERT INTO TipoTransaccion (Nombre, Descripcion) VALUES (t_Nombre, t_Descripcion);
+
+END//
+
+CREATE PROCEDURE asignarTransaccion(
+    IN t_IdTransaccion INTEGER,
+    IN t_Fecha VARCHAR(30),
+    IN t_Detalle VARCHAR(40),
+    IN t_TipoTransaccion INTEGER,
+    IN t_cmpdepdeb INTEGER,
+    IN t_NoCuenta BIGINT
+)
+BEGIN
+    DECLARE saldo_actual DECIMAL(12,2);
+    DECLARE importe_compra DECIMAL(12,2);
+    DECLARE No_Cliente INTEGER;
+    DECLARE No_cuenta BIGINT;
+
+    IF t_Fecha IS NULL OR t_Fecha='' THEN
+        SET t_Fecha=DATE_FORMAT(CURDATE(), '%Y-%m-%d');
+    ELSE
+        SET t_Fecha=STR_TO_DATE(t_Fecha, '%d/%m/%Y');
+    END IF;
+    
+    IF NOT EXISTS(SELECT * FROM TipoTransaccion WHERE CodigoTransaccion=t_TipoTransaccion) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El tipo de transaccion no existe.';
+    END IF;
+
+    IF NOT EXISTS(SELECT * FROM Cuenta WHERE IdCuenta=t_NoCuenta) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El numero de cuenta no existe.';
+    END IF;
+
+    IF t_Detalle='' or t_Detalle IS NULL THEN
+        SET t_Detalle=NULL;
+    END IF;
+
+
+
+    IF t_TipoTransaccion=1 THEN
+        -- Compra
+        IF NOT EXISTS(SELECT * FROM Compra WHERE IdCompra=t_cmpdepdeb) THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'La compra no existe.';
+        END IF;
+
+        -- encontramos el numero cliente
+        SELECT IdCliente INTO No_Cliente from Compra WHERE IdCompra=t_cmpdepdeb;
+
+        -- encontramos el numero de cuenta
+        SELECT IdCuenta INTO No_cuenta from Cuenta WHERE IdCliente=No_Cliente;
+
+
+        -- comparamos si la cuenta ingresada es la misma que la de la compra
+        IF No_cuenta<>t_NoCuenta THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El numero de cuenta no coincide con el asociado a la compra.';
+        END IF;
+
+        -- extraemos el saldo actual de la cuenta
+        SELECT Saldo_Cuenta INTO saldo_actual FROM Cuenta WHERE IdCuenta = t_NoCuenta;
+        -- extraemos el importe de la compra
+        SELECT Importe INTO importe_compra FROM Compra WHERE IdCompra = t_cmpdepdeb;
+
+        -- verificamos si el saldo es suficiente
+        IF (saldo_actual - importe_compra) < 0 THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Fondos insuficientes en la cuenta para realizar la compra.';
+        ELSE
+        
+            INSERT INTO Transaccion (Fecha, Detalle, TipoTransaccion,IdCompra, IdCuenta) VALUES (t_Fecha, t_Detalle, t_TipoTransaccion,t_cmpdepdeb, t_NoCuenta);
+            -- actualizamos el saldo de la cuenta
+            UPDATE Cuenta SET Saldo_Cuenta = saldo_actual - importe_compra WHERE IdCuenta = t_NoCuenta;
+        END IF;
+
+        
+
+    END IF;
+
+
+    
+
+END//
+
 DELIMITER ;
+
 
 
 -- TIPOS DE CLIENTES
@@ -417,40 +569,51 @@ CALL registrarCuenta(3030206081, 600.00, 600.00, 'Apertura de cuenta con Q500','
 
 -- registro de productoservicio
 --                         id, tipo, costo, descripcion
-CALL crearProductoServicio(1,'Servicio de tarjeta de debito',1,10,'tipo 1');
-CALL crearProductoServicio(2,'Servicio de chequera',1,10,'tipo 1');
-CALL crearProductoServicio(3,'Servicio de asesoramiento financiero',1,400,'tipo 1');
-CALL crearProductoServicio(4,'Servicio de banca personal',1,5,'tipo 1');
-CALL crearProductoServicio(5,'Seguro de Vida',1,30,'tipo 1');
-CALL crearProductoServicio(6,'Seguro de vida plus',1,100,'tipo 1');
-CALL crearProductoServicio(7,'Seguro de automovil',1,300,'tipo 1');
-CALL crearProductoServicio(8,'Seguro de automovil plus',1,500,'tipo 1');
-CALL crearProductoServicio(9,'Servicio de Deposito',1,0.05,'tipo 1');
-CALL crearProductoServicio(10,'Servicio de Debito',1,0.10,'tipo 1');
+CALL crearProductoServicio(1,1,10,'Servicio de tarjeta de debito');
+CALL crearProductoServicio(2,1,10,'Servicio de chequera');
+CALL crearProductoServicio(3,1,400,'Servicio de asesoramiento financiero');
+CALL crearProductoServicio(4,1,5,'Servicio de banca personal');
+CALL crearProductoServicio(5,1,30,'Seguro de Vida');
+CALL crearProductoServicio(6,1,100,'Seguro de vida plus');
+CALL crearProductoServicio(7,1,300,'Seguro de automovil');
+CALL crearProductoServicio(8,1,500,'Seguro de automovil plus');
+CALL crearProductoServicio(9,1,0.05,'Servicio de Deposito');
+CALL crearProductoServicio(10,1,0.10,'Servicio de Debito');
 -- productos
-CALL crearProductoServicio(11,'Pago de energía Eléctrica (EEGSA)',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
-CALL crearProductoServicio(12,'Pago de agua potable (EMPAGUA)',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
-CALL crearProductoServicio(13,'Pago de Matricula USAC',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
-CALL crearProductoServicio(14,'Pago de Curso Vacaciones Usac ',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
-CALL crearProductoServicio(15,'Pago de servicio de internet',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
-CALL crearProductoServicio(16,'Servicio de suscripción plataformas streaming',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
-CALL crearProductoServicio(17,'Servicios Cloud',2,0,'Este varía al realizar en compras (el valor de pago de factura).');
-CALL crearProductoServicio(18,'Servicio Extra', 1, 53.80, 'Este es un servicio el cual tiene un precio predefinido');
-CALL crearProductoServicio(19,'Producto Extra', 2, 0, 'Este es un producto el cual tiene un precio variable'); -- producto, tiene un precio de "cero" el cual indica que es variable
+CALL crearProductoServicio(11,2,0,'Pago de energía Eléctrica (EEGSA)');
+CALL crearProductoServicio(12,2,0,'Pago de agua potable (EMPAGUA)');
+CALL crearProductoServicio(13,2,0,'Pago de Matricula USAC');
+CALL crearProductoServicio(14,2,0,'Pago de Curso Vacaciones Usac');
+CALL crearProductoServicio(15,2,0,'Pago de servicio de internet');
+CALL crearProductoServicio(16,2,0,'Servicio de suscripción plataformas streaming');
+CALL crearProductoServicio(17,2,0,'Servicios Cloud');
+CALL crearProductoServicio(18, 1, 53.80,'Servicio Extra');
+CALL crearProductoServicio(19, 2, 0,'Producto Extra'); -- producto, tiene un precio de "cero" el cual indica que es variable
 
 -- realizar compra
 --                  id,      fecha,   monto,  otrosdetalles, codProducto/Servicio, idcliente
 CALL realizarCompra(1111, '10/04/2024', 0, 'compra de servicio', 18, 1001); -- aqui hay error ya que el monto deberia de ser cero por que ya tiene un precio preestablecido por ser un servicio
 call realizarCompra(1113, '10/04/2024', 34, 'compra de producto', 19, 1001); -- aqui esta correcto ya que el monto es mayor a cero y es un producto
 call realizarCompra(1114, '10/04/2024', 0, 'compra de producto', 8, 1001);
+call realizarCompra(1115, '10/04/2024', 0, 'compra de producto', 8, 1002);
 -- call realizarCompra(1115, '10/04/2024', 0, 'compra de producto', 8, 1001); -- cuenta sin saldo
 
 
 -- realizar deposito
 --              id,      fecha,     monto,  otrosdetalles, idcliente
-CALL realizarDeposito(1114, '10/04/2024', 100, 'deposito de dinero', 1001);
+CALL realizarDeposito(1114, '', 100, 'deposito de dinero', 1001);
 CALL realizarDeposito(1115, '10/04/2024', 21, 'deposito de dinero', 1001); -- aqui hay error ya que el monto deberia de ser mayor a cero
 
+-- realizar retiro
+--              id,      fecha,     monto,  otrosdetalles, idcliente
+CALL realizarDebito(1116, '10/04/2024', 100, 'retiro de dinero', 1001);
+CALL realizarDebito(1117, '10/04/2024', 2, 'retiro de dinero con error', 1001); -- aqui hay error ya que el monto deberia de ser mayor a cero
+
+CALL registrarTipoTransaccion(1, 'Compra', 'Transacción de compra');
+CALL registrarTipoTransaccion(2, 'Deposito', 'Transacción de deposito');
+CALL registrarTipoTransaccion(3, 'Debito', 'Transacción de debito');
+
+CALL asignarTransaccion(1118, '10/04/2024','',1, 1115, 3030206080);
 
 
 SELECT * from tipocliente;
@@ -462,4 +625,6 @@ SELECT * from TipoCuenta;
 SELECT * FROM productoservicio;
 SELECT * FROM compra;
 SELECT * FROM Deposito;
-
+SELECT * FROM Debito;
+SELECT * FROM TipoTransaccion;
+SELECT * FROM Transaccion;

@@ -61,7 +61,6 @@ CREATE TABLE Cuenta(
 DROP TABLE IF EXISTS ProductoServicio;
 CREATE TABLE ProductoServicio(
     IdProductoServicio INTEGER PRIMARY KEY,
-    Nombre VARCHAR(60) NOT NULL,
     Tipo INTEGER NOT NULL,
     Costo DECIMAL(12,2),
     Descripcion VARCHAR(100) NOT NULL
