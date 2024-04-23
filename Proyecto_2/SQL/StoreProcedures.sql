@@ -9,6 +9,10 @@ DROP PROCEDURE IF EXISTS realizarCompra;
 DROP PROCEDURE IF EXISTS realizarDeposito;
 DROP PROCEDURE IF EXISTS realizarDebito;
 DROP PROCEDURE IF EXISTS registrarTipoTransaccion;
+DROP PROCEDURE IF EXISTS asignarTransaccion;
+DROP PROCEDURE IF EXISTS consultarSaldoCliente;
+DROP PROCEDURE IF EXISTS consultarCliente;
+DROP PROCEDURE IF EXISTS consultarMovsCliente;
 
 DELIMITER //
 
@@ -535,8 +539,187 @@ BEGIN
 
     END IF;
 
+    IF t_TipoTransaccion=2 THEN
+        -- Deposito
+        IF NOT EXISTS(SELECT * FROM Deposito WHERE IdDeposito=t_cmpdepdeb) THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El deposito no existe.';
+        END IF;
+
+        -- encontramos el numero cliente
+        SELECT IdCliente INTO No_Cliente from Deposito WHERE IdDeposito=t_cmpdepdeb;
+
+        -- encontramos el numero de cuenta
+        SELECT IdCuenta INTO No_cuenta from Cuenta WHERE IdCliente=No_Cliente;
+
+        -- comparamos si la cuenta ingresada es la misma que la del deposito
+        IF No_cuenta<>t_NoCuenta THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El numero de cuenta no coincide con el asociado al deposito.';
+        END IF;
+
+        -- extraemos el saldo actual de la cuenta
+        SELECT Saldo_Cuenta INTO saldo_actual FROM Cuenta WHERE IdCuenta = t_NoCuenta;
+        -- extraemos el importe del deposito
+        SELECT Monto INTO importe_compra FROM Deposito WHERE IdDeposito = t_cmpdepdeb;
+
+        -- actualizamos el saldo de la cuenta
+        UPDATE Cuenta SET Saldo_Cuenta = saldo_actual + importe_compra WHERE IdCuenta = t_NoCuenta;
+
+        INSERT INTO Transaccion (Fecha, Detalle, TipoTransaccion,IdDeposito, IdCuenta) VALUES (t_Fecha, t_Detalle, t_TipoTransaccion,t_cmpdepdeb, t_NoCuenta);
+    END IF;
+
+
+    IF t_TipoTransaccion=3 THEN
+    
+        -- Debito
+        IF NOT EXISTS(SELECT * FROM Debito WHERE IdDebito=t_cmpdepdeb) THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El debito no existe.';
+        END IF;
+
+        -- encontramos el numero cliente
+        SELECT IdCliente INTO No_Cliente from Debito WHERE IdDebito=t_cmpdepdeb;
+
+        -- encontramos el numero de cuenta
+        SELECT IdCuenta INTO No_cuenta from Cuenta WHERE IdCliente=No_Cliente;
+
+        -- comparamos si la cuenta ingresada es la misma que la del debito
+        IF No_cuenta<>t_NoCuenta THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El numero de cuenta no coincide con el asociado al debito.';
+        END IF;
+
+        -- extraemos el saldo actual de la cuenta
+        SELECT Saldo_Cuenta INTO saldo_actual FROM Cuenta WHERE IdCuenta = t_NoCuenta;
+        -- extraemos el importe del debito
+        SELECT Monto INTO importe_compra FROM Debito WHERE IdDebito = t_cmpdepdeb;
+
+        -- verificamos si el saldo es suficiente
+        IF (saldo_actual - importe_compra) < 0 THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Fondos insuficientes en la cuenta para realizar el debito.';
+        ELSE
+            -- actualizamos el saldo de la cuenta
+            UPDATE Cuenta SET Saldo_Cuenta = saldo_actual - importe_compra WHERE IdCuenta = t_NoCuenta;
+            INSERT INTO Transaccion (Fecha, Detalle, TipoTransaccion,IdDebito, IdCuenta) VALUES (t_Fecha, t_Detalle, t_TipoTransaccion,t_cmpdepdeb, t_NoCuenta);
+        END IF;
+    END IF;
+
 
     
+
+END//
+
+-- AQUI VAN LOS ULTIMOS 7 PROCEDURES
+
+CREATE PROCEDURE consultarSaldoCliente(
+    IN NoCuenta BIGINT
+)
+BEGIN
+    IF NOT EXISTS(SELECT * FROM Cuenta WHERE IdCuenta=NoCuenta) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La cuenta no existe';
+    END IF;
+
+
+    SELECT 
+    Cliente.Nombre,
+    TipoCliente.Nombre as Tipo_Cliente,
+    TipoCuenta.Nombre as Tipo_Cuenta,
+    Cuenta.Saldo_Cuenta,
+    Cuenta.Monto_Apertura 
+    from Cuenta 
+    JOIN Cliente ON Cuenta.IdCliente=Cliente.IdCliente
+    JOIN TipoCliente ON Cliente.TipoCliente=TipoCliente.idTipo
+    JOIN TipoCuenta ON Cuenta.TipoCuenta=TipoCuenta.Codigo
+    WHERE Cuenta.IdCuenta=NoCuenta;
+
+
+END//
+
+CREATE PROCEDURE consultarCliente(
+    IN c_Id INTEGER
+)
+BEGIN
+    DECLARE No_Cuentas INTEGER;
+    DECLARE telefonos VARCHAR(100);
+    DECLARE correos VARCHAR(200);
+    DECLARE tipos VARCHAR(100);
+
+    SET No_Cuentas=(SELECT COUNT(*) FROM Cuenta WHERE IdCliente=c_Id);
+
+    IF NOT EXISTS(SELECT * FROM Cliente WHERE IdCliente=c_Id) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El cliente no existe';
+    END IF;
+
+    SELECT GROUP_CONCAT(Telefono SEPARATOR '-') INTO telefonos FROM Telefono WHERE IdCliente=c_Id;
+    SELECT GROUP_CONCAT(Correo SEPARATOR '-') INTO correos FROM Correo WHERE IdCliente=c_Id;
+    
+
+   
+    -- Obtener los nombres de los tipos de cuenta asociados al cliente
+    SELECT GROUP_CONCAT(TipoCuenta.Nombre SEPARATOR '-') INTO tipos
+    FROM Cuenta
+    INNER JOIN TipoCuenta ON Cuenta.TipoCuenta = TipoCuenta.Codigo
+    WHERE Cuenta.IdCliente = c_Id;
+
+
+    SELECT 
+    Cliente.IdCliente,
+    CONCAT(Cliente.Nombre,' ',Cliente.Apellido) as Nombre_Completo,
+    Cliente.Fecha_Creacion,
+    Cliente.Usuario,
+    No_Cuentas as Cuentas_Activas,
+    telefonos as Telefonos,
+    correos as Correos,
+    tipos as Tipos_Cuenta
+    FROM Cliente 
+    WHERE Cliente.IdCliente=c_Id;
+
+
+END//
+
+CREATE PROCEDURE consultarMovsCliente(
+    IN c_IdCliente INTEGER
+)
+BEGIN
+
+    DECLARE No_Cuenta BIGINT;
+
+    SELECT IdCuenta INTO No_Cuenta FROM Cuenta WHERE IdCliente=c_IdCliente;
+
+
+
+    IF NOT EXISTS(SELECT * FROM Cliente WHERE IdCliente=c_IdCliente) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El cliente no existe';
+    END IF;
+
+
+    SELECT
+        Transaccion.idTransaccion,
+        CASE
+            WHEN Transaccion.idDebito IS NOT NULL THEN 'Débito'
+            WHEN Transaccion.idDeposito IS NOT NULL THEN 'Depósito'
+            WHEN Transaccion.idCompra IS NOT NULL THEN 'Compra'
+        END AS TipoTransaccion,
+        CASE 
+            WHEN Debito.Monto IS NOT NULL THEN Debito.Monto
+            WHEN Deposito.Monto IS NOT NULL THEN Deposito.Monto
+            WHEN Compra.Importe IS NOT NULL THEN Compra.Importe
+        END AS Monto,
+        Transaccion.IdCuenta AS No_Cuenta,
+        TipoCuenta.Nombre AS Tipo_Cuenta
+    FROM Transaccion
+    LEFT JOIN Compra ON Transaccion.IdCompra = Compra.IdCompra
+    LEFT JOIN Deposito ON Transaccion.IdDeposito = Deposito.IdDeposito
+    LEFT JOIN Debito ON Transaccion.IdDebito = Debito.IdDebito
+    LEFT JOIN Cuenta ON Transaccion.IdCuenta = Cuenta.IdCuenta
+    JOIN Cliente ON Cuenta.IdCliente = Cliente.IdCliente
+    JOIN TipoCuenta ON Cuenta.TipoCuenta = TipoCuenta.Codigo
+    WHERE Cliente.IdCliente = c_IdCliente; -- Aquí debes reemplazar tu_IdCliente con el ID del cliente deseado
 
 END//
 
@@ -614,6 +797,15 @@ CALL registrarTipoTransaccion(2, 'Deposito', 'Transacción de deposito');
 CALL registrarTipoTransaccion(3, 'Debito', 'Transacción de debito');
 
 CALL asignarTransaccion(1118, '10/04/2024','',1, 1115, 3030206080);
+CALL asignarTransaccion(1115, '10/04/2024','',2, 1114, 3030206081); -- se realia deposito *aqui se puede depositar a una cuenta que no es del cliente
+CALL asignarTransaccion(1120, '10/04/2024','este si tiene detalle',3, 1116, 3030206081); -- se realiza un debito
+
+
+CALL consultarSaldoCliente(3030206081);
+
+CALL consultarCliente(1002);
+
+CALL consultarMovsCliente(1002);
 
 
 SELECT * from tipocliente;
