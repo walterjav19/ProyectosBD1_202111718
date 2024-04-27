@@ -13,6 +13,10 @@ DROP PROCEDURE IF EXISTS asignarTransaccion;
 DROP PROCEDURE IF EXISTS consultarSaldoCliente;
 DROP PROCEDURE IF EXISTS consultarCliente;
 DROP PROCEDURE IF EXISTS consultarMovsCliente;
+DROP PROCEDURE IF EXISTS consultarTipoCuentas;
+DROP PROCEDURE IF EXISTS consultarMovsGenFech;
+DROP PROCEDURE IF EXISTS consultarMovsFechClien;
+DROP PROCEDURE IF EXISTS consultarProductoServicio;
 
 DELIMITER //
 
@@ -510,7 +514,7 @@ BEGIN
         SELECT IdCliente INTO No_Cliente from Compra WHERE IdCompra=t_cmpdepdeb;
 
         -- encontramos el numero de cuenta
-        SELECT IdCuenta INTO No_cuenta from Cuenta WHERE IdCliente=No_Cliente;
+        SELECT IdCuenta INTO No_cuenta from Cuenta WHERE IdCliente=No_Cliente and IdCuenta=t_NoCuenta;
 
 
         -- comparamos si la cuenta ingresada es la misma que la de la compra
@@ -550,7 +554,7 @@ BEGIN
         SELECT IdCliente INTO No_Cliente from Deposito WHERE IdDeposito=t_cmpdepdeb;
 
         -- encontramos el numero de cuenta
-        SELECT IdCuenta INTO No_cuenta from Cuenta WHERE IdCliente=No_Cliente;
+        SELECT IdCuenta INTO No_cuenta from Cuenta WHERE IdCliente=No_Cliente and IdCuenta=t_NoCuenta;
 
         -- comparamos si la cuenta ingresada es la misma que la del deposito
         IF No_cuenta<>t_NoCuenta THEN
@@ -582,7 +586,7 @@ BEGIN
         SELECT IdCliente INTO No_Cliente from Debito WHERE IdDebito=t_cmpdepdeb;
 
         -- encontramos el numero de cuenta
-        SELECT IdCuenta INTO No_cuenta from Cuenta WHERE IdCliente=No_Cliente;
+        SELECT IdCuenta INTO No_cuenta from Cuenta WHERE IdCliente=No_Cliente and IdCuenta=t_NoCuenta;
 
         -- comparamos si la cuenta ingresada es la misma que la del debito
         IF No_cuenta<>t_NoCuenta THEN
@@ -686,9 +690,7 @@ CREATE PROCEDURE consultarMovsCliente(
 )
 BEGIN
 
-    DECLARE No_Cuenta BIGINT;
 
-    SELECT IdCuenta INTO No_Cuenta FROM Cuenta WHERE IdCliente=c_IdCliente;
 
 
 
@@ -723,6 +725,150 @@ BEGIN
 
 END//
 
+
+CREATE PROCEDURE consultarTipoCuentas(
+    IN c_tipocuenta INTEGER
+)
+BEGIN
+    IF NOT EXISTS(SELECT * FROM TipoCuenta WHERE Codigo=c_tipocuenta) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El tipo de cuenta no existe';
+    END IF;
+
+   SELECT 
+        TC.Codigo,
+        TC.Nombre,
+        COUNT(C.IdCuenta) AS Cuentas_Activas
+    FROM 
+        TipoCuenta TC
+    LEFT JOIN 
+        Cuenta C ON TC.Codigo = C.TipoCuenta
+    WHERE 
+        TC.Codigo = c_tipocuenta
+    GROUP BY 
+        TC.Codigo, TC.Nombre;
+    
+END//
+
+CREATE PROCEDURE consultarMovsGenFech(
+    IN c_FechaInicio VARCHAR(30),
+    IN c_FechaFin VARCHAR(30)
+)
+BEGIN
+    -- validar que las fechas sean válidas  dd/mm/yy
+    IF NOT c_FechaInicio REGEXP '^[0-9]{2}/[0-9]{2}/[0-9]{2}$' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La fecha de inicio no tiene el formato correcto.';
+    END IF;
+
+    IF NOT c_FechaFin REGEXP '^[0-9]{2}/[0-9]{2}/[0-9]{2}$' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La fecha de fin no tiene el formato correcto.';
+    END IF;
+
+    -- convertir las fechas al formato correcto
+    SET c_FechaInicio = STR_TO_DATE(c_FechaInicio, '%d/%m/%y');
+    SET c_FechaFin = STR_TO_DATE(c_FechaFin, '%d/%m/%y');
+
+    SELECT 
+    transaccion.idTransaccion,
+    CASE
+        WHEN transaccion.idDebito IS NOT NULL THEN 'Débito'
+        WHEN transaccion.idDeposito IS NOT NULL THEN 'Depósito'
+        WHEN transaccion.idCompra IS NOT NULL THEN 'Compra'
+    END AS TipoTransaccion,
+    Cliente.Nombre,
+    Cuenta.IdCuenta,
+    TipoCuenta.Nombre AS TipoCuenta,
+    transaccion.Fecha,
+    CASE
+        WHEN Compra.IdCompra IS NOT NULL THEN Compra.importe
+        WHEN Deposito.IdDeposito IS NOT NULL THEN Deposito.monto
+        WHEN Debito.IdDebito IS NOT NULL THEN Debito.monto
+    END AS monto,
+    transaccion.Detalle
+    FROM Transaccion
+    JOIN Cuenta ON Transaccion.IdCuenta = Cuenta.IdCuenta
+    JOIN Cliente ON Cuenta.IdCliente = Cliente.IdCliente
+    JOIN TipoCuenta ON Cuenta.TipoCuenta = TipoCuenta.Codigo
+    LEFT JOIN Compra ON Transaccion.IdCompra = Compra.IdCompra
+    LEFT JOIN Deposito ON Transaccion.IdDeposito = Deposito.IdDeposito
+    LEFT JOIN Debito ON Transaccion.IdDebito = Debito.IdDebito
+    WHERE Transaccion.Fecha BETWEEN c_FechaInicio AND c_FechaFin;
+
+
+
+
+END// 
+
+CREATE PROCEDURE consultarMovsFechClien(
+    IN c_IdCliente INTEGER,
+    IN c_FechaInicio VARCHAR(30),
+    IN c_FechaFin VARCHAR(30)
+)
+BEGIN
+    IF NOT EXISTS(SELECT * FROM Cliente WHERE IdCliente=c_IdCliente) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El cliente no existe';
+    END IF;
+
+    -- validar que las fechas sean válidas  dd/mm/yy
+    IF NOT c_FechaInicio REGEXP '^[0-9]{2}/[0-9]{2}/[0-9]{2}$' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La fecha de inicio no tiene el formato correcto.';
+    END IF;
+
+    IF NOT c_FechaFin REGEXP '^[0-9]{2}/[0-9]{2}/[0-9]{2}$' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La fecha de fin no tiene el formato correcto.';
+    END IF;
+
+    -- convertir las fechas al formato correcto
+    SET c_FechaInicio = STR_TO_DATE(c_FechaInicio, '%d/%m/%y');
+    SET c_FechaFin = STR_TO_DATE(c_FechaFin, '%d/%m/%y');
+
+    SELECT 
+    transaccion.idTransaccion,
+    CASE
+        WHEN transaccion.idDebito IS NOT NULL THEN 'Débito'
+        WHEN transaccion.idDeposito IS NOT NULL THEN 'Depósito'
+        WHEN transaccion.idCompra IS NOT NULL THEN 'Compra'
+    END AS TipoTransaccion,
+    Cliente.Nombre,
+    Cuenta.IdCuenta,
+    TipoCuenta.Nombre AS TipoCuenta,
+    transaccion.Fecha,
+    CASE
+        WHEN Compra.IdCompra IS NOT NULL THEN Compra.importe
+        WHEN Deposito.IdDeposito IS NOT NULL THEN Deposito.monto
+        WHEN Debito.IdDebito IS NOT NULL THEN Debito.monto
+    END AS monto,
+    transaccion.Detalle
+    FROM Transaccion
+    JOIN Cuenta ON Transaccion.IdCuenta = Cuenta.IdCuenta
+    JOIN Cliente ON Cuenta.IdCliente = Cliente.IdCliente
+    JOIN TipoCuenta ON Cuenta.TipoCuenta = TipoCuenta.Codigo
+    LEFT JOIN Compra ON Transaccion.IdCompra = Compra.IdCompra
+    LEFT JOIN Deposito ON Transaccion.IdDeposito = Deposito.IdDeposito
+    LEFT JOIN Debito ON Transaccion.IdDebito = Debito.IdDebito
+    WHERE Cliente.IdCliente = c_IdCliente
+    AND Transaccion.Fecha BETWEEN c_FechaInicio AND c_FechaFin;
+
+END//
+
+CREATE PROCEDURE consultarProductoServicio()
+BEGIN
+    SELECT 
+    IdProductoServicio AS CODIGO,
+    Descripcion AS Nombre, 
+    TIPO,
+    CASE TIPO
+        WHEN 1 THEN 'SERVICIO'
+        WHEN 2 THEN 'PRODUCTO'
+    END AS Descripcion
+    FROM ProductoServicio;
+END//
+
 DELIMITER ;
 
 
@@ -749,6 +895,8 @@ CALL registrarCliente(1003, 'Walter Javier','Santizo Mazriegos','50259663187-455
 --               idcuenta, montoapertura,*saldo, descripcion,     fechaapertura,otrosdetalles,idtipocuenta,idcliente
 CALL registrarCuenta(3030206080, 800.00, 800.00, 'Apertura de cuenta con Q500','','',5,1002);
 CALL registrarCuenta(3030206081, 600.00, 600.00, 'Apertura de cuenta con Q500','01/04/2024 07:00:00','esta apertura tiene fecha',5,1001);
+CALL registrarCuenta(3030206082, 900.00, 900.00, 'Apertura de cuenta con Q900','01/04/2024 07:00:00','esta apertura tiene fecha',5,1001);
+
 
 -- registro de productoservicio
 --                         id, tipo, costo, descripcion
@@ -779,6 +927,7 @@ CALL realizarCompra(1111, '10/04/2024', 0, 'compra de servicio', 18, 1001); -- a
 call realizarCompra(1113, '10/04/2024', 34, 'compra de producto', 19, 1001); -- aqui esta correcto ya que el monto es mayor a cero y es un producto
 call realizarCompra(1114, '10/04/2024', 0, 'compra de producto', 8, 1001);
 call realizarCompra(1115, '10/04/2024', 0, 'compra de producto', 8, 1002);
+call realizarCompra(1116, '10/04/2024', 0, 'compra de producto', 8, 1001);
 -- call realizarCompra(1115, '10/04/2024', 0, 'compra de producto', 8, 1001); -- cuenta sin saldo
 
 
@@ -799,13 +948,19 @@ CALL registrarTipoTransaccion(3, 'Debito', 'Transacción de debito');
 CALL asignarTransaccion(1118, '10/04/2024','',1, 1115, 3030206080);
 CALL asignarTransaccion(1115, '10/04/2024','',2, 1114, 3030206081); -- se realia deposito *aqui se puede depositar a una cuenta que no es del cliente
 CALL asignarTransaccion(1120, '10/04/2024','este si tiene detalle',3, 1116, 3030206081); -- se realiza un debito
+CALL asignarTransaccion(1121, '10/06/2024','este si tiene detalle',1, 1116, 3030206082);-- compra 
 
+CALL consultarSaldoCliente(3030206082);
 
-CALL consultarSaldoCliente(3030206081);
+CALL consultarCliente(1001);
 
-CALL consultarCliente(1002);
+CALL consultarMovsCliente(1001);	
 
-CALL consultarMovsCliente(1002);
+CALL consultarTipoCuentas(1);
+
+CALL consultarMovsGenFech('10/04/24','10/06/24');
+CALL consultarMovsFechClien(1001,'10/04/24','10/06/24');
+CALL consultarProductoServicio();
 
 
 SELECT * from tipocliente;
@@ -820,3 +975,4 @@ SELECT * FROM Deposito;
 SELECT * FROM Debito;
 SELECT * FROM TipoTransaccion;
 SELECT * FROM Transaccion;
+SELECT * FROM Historial;

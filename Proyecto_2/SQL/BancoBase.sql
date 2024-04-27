@@ -124,4 +124,13 @@ CREATE TABLE Transaccion(
     FOREIGN KEY (IdCuenta) REFERENCES Cuenta(IdCuenta)
 );
 
+DROP TABLE IF EXISTS Historial;
+CREATE TABLE Historial(
+    Fecha DATETIME,
+    Descripcion VARCHAR(100),
+    Tabla VARCHAR(40),  
+    Tipo VARCHAR(20)
+);
+    
+
 /*FIN TABLAS*/
